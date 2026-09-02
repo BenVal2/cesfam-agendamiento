@@ -4,6 +4,14 @@ Aplicación web full-stack de agendamiento de horas médicas para centros de sal
 
 Proyecto de portafolio — creado como una propuesta real de sistema de agendamiento. Los datos de contacto son de ejemplo (neutralizados).
 
+## Demo
+
+**URL de producción:** https://cesfam-agendamiento.vercel.app
+
+**Cuenta demo:** correo `demo@cesfam.cl` · contraseña `demo1234`
+
+> La demo corre sobre PostgreSQL real en Neon. Cualquier cita que agendes quedará visible en "Mis Citas".
+
 ## Características
 
 - **Registro e inicio de sesión** con contraseña segura (bcrypt) y sesiones JWT (NextAuth).
