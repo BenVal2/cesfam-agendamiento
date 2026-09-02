@@ -1,0 +1,237 @@
+@import "tailwindcss";
+
+/* ── Design Tokens ── */
+:root {
+  /* Color palette — Light */
+  --bg: #f8fafb;
+  --bg-elevated: #ffffff;
+  --fg: #0c1222;
+  --fg-secondary: #475569;
+  --fg-muted: #94a3b8;
+
+  /* Brand */
+  --primary: #0d7c8a;
+  --primary-hover: #0a6670;
+  --primary-soft: #e0f5f7;
+  --primary-glow: rgba(13, 124, 138, 0.15);
+  --secondary: #10b981;
+  --secondary-soft: #ecfdf5;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --danger-soft: #fef2f2;
+
+  /* Surfaces */
+  --card: #ffffff;
+  --card-border: #e8ecf0;
+  --card-hover: #f0f7f8;
+  --nav-bg: rgba(255, 255, 255, 0.82);
+  --nav-border: #e8ecf0;
+
+  /* Inputs */
+  --input-bg: #f8fafb;
+  --input-border: #d1d9e0;
+  --input-focus: #0d7c8a;
+  --input-ring: rgba(13, 124, 138, 0.25);
+
+  /* Semantic */
+  --success-bg: #ecfdf5;
+  --success-fg: #065f46;
+  --error-bg: #fef2f2;
+  --error-fg: #991b1b;
+
+  /* Ambient shadows (not flat) */
+  --shadow-xs: 0 1px 2px rgba(12, 18, 34, 0.04);
+  --shadow-sm: 0 1px 3px rgba(12, 18, 34, 0.06), 0 1px 2px rgba(12, 18, 34, 0.04);
+  --shadow-md: 0 4px 12px rgba(12, 18, 34, 0.07), 0 2px 4px rgba(12, 18, 34, 0.04);
+  --shadow-lg: 0 12px 32px rgba(12, 18, 34, 0.08), 0 4px 8px rgba(12, 18, 34, 0.04);
+  --shadow-glow: 0 0 0 3px var(--input-ring);
+
+  /* Spacing scale (4px base) */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-20: 5rem;
+  --sp-24: 6rem;
+
+  /* Border radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Typography — modular scale 1.25 */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+
+  /* Gradients */
+  --gradient-hero: linear-gradient(135deg, #e0f5f7 0%, #f0f9ff 40%, #ecfdf5 100%);
+  --gradient-card: linear-gradient(180deg, var(--card) 0%, var(--card) 100%);
+  --gradient-primary: linear-gradient(135deg, #0d7c8a, #10b981);
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+}
+
+/* ── Dark Mode (native, not afterthought) ── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1120;
+    --bg-elevated: #131c2e;
+    --fg: #e8ecf0;
+    --fg-secondary: #94a3b8;
+    --fg-muted: #64748b;
+
+    --primary: #22d3ee;
+    --primary-hover: #67e8f9;
+    --primary-soft: #083344;
+    --primary-glow: rgba(34, 211, 238, 0.15);
+    --secondary: #34d399;
+    --secondary-soft: #064e3b;
+    --danger: #f87171;
+    --danger-hover: #fca5a5;
+    --danger-soft: #450a0a;
+
+    --card: #131c2e;
+    --card-border: #1e293b;
+    --card-hover: #1a2540;
+    --nav-bg: rgba(11, 17, 32, 0.85);
+    --nav-border: #1e293b;
+
+    --input-bg: #0f1729;
+    --input-border: #293548;
+    --input-focus: #22d3ee;
+    --input-ring: rgba(34, 211, 238, 0.2);
+
+    --success-bg: #064e3b;
+    --success-fg: #6ee7b7;
+    --error-bg: #450a0a;
+    --error-fg: #fca5a5;
+
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0, 0, 0, 0.2);
+    --shadow-glow: 0 0 0 3px var(--input-ring);
+
+    --gradient-hero: linear-gradient(135deg, #083344 0%, #0f1729 40%, #064e3b 100%);
+    --gradient-card: linear-gradient(180deg, var(--card) 0%, var(--card) 100%);
+    --gradient-primary: linear-gradient(135deg, #22d3ee, #34d399);
+  }
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  line-height: 1.65;
+}
+
+/* ── Skip Link ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--sp-4);
+  padding: var(--sp-3) var(--sp-5);
+  background: var(--primary);
+  color: var(--bg);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  z-index: 100;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top var(--duration-fast) var(--ease-out);
+}
+.skip-link:focus { top: 0; }
+
+/* ── Focus ring (WCAG) ── */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Utility classes ── */
+.glass {
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+}
+
+.glass-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal) var(--ease-out);
+}
+
+.glass-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Responsive containment ── */
+@supports (contain: layout) {
+  .container-safe {
+    width: 100%;
+    overflow-x: clip;
+  }
+}
+
+/* ── Hamburger animation ── */
+.hamburger-line {
+  transition: transform var(--duration-normal) var(--ease-out),
+              opacity var(--duration-fast);
+}
+.hamburger-open .hamburger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger-open .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-open .hamburger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
