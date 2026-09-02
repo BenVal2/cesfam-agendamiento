@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${geistSans.variable} h-full antialiased`}>
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen w-full flex flex-col">
         <a href="#contenido-principal" className="skip-link">
           Saltar al contenido
         </a>
@@ -39,17 +39,17 @@ export default function RootLayout({
         <SessionProvider>
           <Navbar />
 
-          <div className="flex-1 w-full">
+          <div className="flex-1 w-full flex justify-center">
             <main
               id="contenido-principal"
-              className="w-full max-w-5xl mx-auto px-5 sm:px-8 lg:px-10 py-10 sm:py-14"
+              className="w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-10 sm:py-14"
             >
               {children}
             </main>
           </div>
 
-          <footer className="border-t border-card-border mt-auto">
-            <div className="w-full max-w-5xl mx-auto px-5 sm:px-8 lg:px-10 py-8">
+          <footer className="w-full border-t border-card-border mt-auto">
+            <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-8">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-fg-muted">
                 <div className="flex items-center gap-2">
                   <span className="flex h-7 w-7 items-center justify-center rounded-[var(--radius-sm)] bg-gradient-to-br from-primary to-secondary text-white" aria-hidden="true">

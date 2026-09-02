@@ -12,8 +12,8 @@ export default function Navbar() {
   const isAdmin = (session?.user as Record<string, unknown>)?.role === "admin";
 
   return (
-    <header className="sticky top-0 z-50 glass border-b border-nav-border">
-      <nav className="mx-auto max-w-5xl px-5 sm:px-8 lg:px-10" aria-label="Navegación principal">
+    <header className="sticky top-0 z-50 w-full glass border-b border-nav-border">
+      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10" aria-label="Navegación principal">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 text-fg no-underline shrink-0">
@@ -73,7 +73,7 @@ export default function Navbar() {
         {/* Mobile menu */}
         {open && (
           <div className="md:hidden absolute left-0 right-0 top-16 border-b border-nav-border bg-nav-bg backdrop-blur-xl pb-4 pt-2 shadow-lg z-40">
-            <ul className="space-y-1 max-w-5xl mx-auto px-4">
+            <ul className="space-y-1 w-full max-w-7xl mx-auto px-4">
               <li><MobileLink href="/" onClick={() => setOpen(false)}>Inicio</MobileLink></li>
               {session ? (
                 <>
