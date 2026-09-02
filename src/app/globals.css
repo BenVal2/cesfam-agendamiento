@@ -81,6 +81,12 @@
   --font-geist-sans: "Geist", system-ui, -apple-system, sans-serif;
 }
 
+@theme inline {
+  /* Semantic aliases (resuelven al tema dark automáticamente) */
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-fg);
+}
+
 /* ── Dark Mode (native) ── */
 @media (prefers-color-scheme: dark) {
   :root {
