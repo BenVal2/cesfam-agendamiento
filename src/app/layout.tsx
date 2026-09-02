@@ -42,14 +42,14 @@ export default function RootLayout({
           <div className="flex-1 w-full">
             <main
               id="contenido-principal"
-              className="w-full px-5 sm:px-8 xl:px-10 py-10 sm:py-14"
+              className="w-full max-w-5xl mx-auto px-5 sm:px-8 lg:px-10 py-10 sm:py-14"
             >
               {children}
             </main>
           </div>
 
           <footer className="border-t border-card-border mt-auto">
-            <div className="w-full px-5 sm:px-8 xl:px-10 py-8">
+            <div className="w-full max-w-5xl mx-auto px-5 sm:px-8 lg:px-10 py-8">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-fg-muted">
                 <div className="flex items-center gap-2">
                   <span className="flex h-7 w-7 items-center justify-center rounded-[var(--radius-sm)] bg-gradient-to-br from-primary to-secondary text-white" aria-hidden="true">
