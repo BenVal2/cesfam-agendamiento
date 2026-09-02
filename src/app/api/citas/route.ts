@@ -142,7 +142,7 @@ export async function DELETE(request: Request) {
 
     const appointment = await prisma.appointment.findUnique({
       where: { id },
-      include: { doctor: true, user: true },
+      select: { id: true, user: { select: { email: true } } },
     });
 
     if (!appointment) {
@@ -159,13 +159,13 @@ export async function DELETE(request: Request) {
     const updated = await prisma.appointment.update({
       where: { id },
       data: { status: "cancelled" },
-      include: { doctor: true, user: true },
+      include: { doctor: true },
     });
 
-    if (process.env.RESEND_API_KEY && updated.user.email) {
+    if (process.env.RESEND_API_KEY && appointment.user.email) {
       sendBookingCancellation({
-        to: updated.user.email,
-        patientName: updated.user.name,
+        to: appointment.user.email,
+        patientName: session.user.name || appointment.user.email,
         doctorName: updated.doctor.name,
         date: updated.appointmentDate.toISOString().split("T")[0],
         time: updated.appointmentTime,
