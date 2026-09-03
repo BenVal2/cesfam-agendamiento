@@ -49,7 +49,7 @@ export default function RegistroPage() {
   }
 
   return (
-    <div className="flex-1 w-full flex items-center justify-center px-5 sm:px-8 py-10">
+    <div className="min-h-[calc(100vh-160px)] w-full flex items-center justify-center p-4">
       <div className="text-center mb-8">
         <span className="inline-flex h-14 w-14 items-center justify-center rounded-[var(--radius-xl)] bg-secondary-soft text-secondary mb-4" aria-hidden="true">
           <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
