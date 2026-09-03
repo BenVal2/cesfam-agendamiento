@@ -13,7 +13,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full block glass border-b border-nav-border">
-      <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8" aria-label="Navegación principal">
+      <nav className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-5 sm:px-8 lg:px-10" aria-label="Navegación principal">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 text-fg no-underline shrink-0">
             <span className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] bg-gradient-to-br from-primary to-secondary text-white" aria-hidden="true">
@@ -71,7 +71,7 @@ export default function Navbar() {
         {/* Mobile menu */}
         {open && (
           <div className="md:hidden absolute left-0 right-0 top-16 border-b border-nav-border bg-nav-bg backdrop-blur-xl pb-4 pt-2 shadow-lg z-40">
-            <ul className="space-y-1 w-full max-w-6xl mx-auto px-4">
+            <ul className="space-y-1 w-full max-w-5xl mx-auto px-4">
               <li><MobileLink href="/" onClick={() => setOpen(false)}>Inicio</MobileLink></li>
               {session ? (
                 <>
