@@ -39,14 +39,12 @@ export default function RootLayout({
         <SessionProvider>
           <Navbar />
 
-          <div className="flex-1 w-full">
-            <main
-              id="contenido-principal"
-              className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
-            >
-              {children}
-            </main>
-          </div>
+          <main
+            id="contenido-principal"
+            className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col items-center"
+          >
+            {children}
+          </main>
 
           <footer className="w-full border-t border-card-border mt-auto bg-background/50">
             <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">

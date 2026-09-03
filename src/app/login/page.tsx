@@ -31,45 +31,46 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-160px)] w-full flex items-center justify-center p-4">
-      <div className="text-center mb-8">
-        <span className="inline-flex h-14 w-14 items-center justify-center rounded-[var(--radius-xl)] bg-primary-soft text-primary mb-4" aria-hidden="true">
+    <div className="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-12 px-4">
+      <div className="text-center md:text-right space-y-4">
+        <span className="inline-flex h-14 w-14 items-center justify-center rounded-[var(--radius-xl)] bg-primary-soft text-primary" aria-hidden="true">
           <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
           </svg>
         </span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-fg mb-2">
+        <h1 className="text-2xl sm:text-3xl font-bold text-fg">
           Iniciar sesión
         </h1>
         <p className="text-fg-secondary">
           Ingresa a tu cuenta para agendar y ver tus citas.
         </p>
+        <p className="text-sm text-fg-muted">
+          ¿No tienes cuenta?{" "}
+          <Link href="/registro" className="font-semibold text-primary hover:underline">
+            Regístrate aquí
+          </Link>
+        </p>
       </div>
 
-      {error && (
-        <div className="mb-6 rounded-[var(--radius-lg)] border border-danger/30 p-4 text-sm font-medium text-danger bg-danger-soft" role="alert">
-          {error}
-        </div>
-      )}
+      <div className="w-full max-w-md mx-auto">
+        {error && (
+          <div className="mb-6 rounded-[var(--radius-lg)] border border-danger/30 p-4 text-sm font-medium text-danger bg-danger-soft" role="alert">
+            {error}
+          </div>
+        )}
 
-      <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto glass-card rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-5">
-        <Field id="email" label="Email" type="email" required value={email} onChange={setEmail} placeholder="tu@email.com" />
-        <Field id="password" label="Contraseña" type="password" required value={password} onChange={setPassword} placeholder="••••••" />
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded-[var(--radius-md)] bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50 transition-colors min-h-[48px]"
-        >
-          {loading ? "Ingresando..." : "Iniciar sesión"}
-        </button>
-      </form>
-
-      <p className="mt-6 text-center text-sm text-fg-secondary">
-        ¿No tienes cuenta?{" "}
-        <Link href="/registro" className="font-semibold text-primary hover:underline">
-          Regístrate aquí
-        </Link>
-      </p>
+        <form onSubmit={handleSubmit} className="w-full glass-card rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-5">
+          <Field id="email" label="Email" type="email" required value={email} onChange={setEmail} placeholder="tu@email.com" />
+          <Field id="password" label="Contraseña" type="password" required value={password} onChange={setPassword} placeholder="••••••" />
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-[var(--radius-md)] bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50 transition-colors min-h-[48px]"
+          >
+            {loading ? "Ingresando..." : "Iniciar sesión"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

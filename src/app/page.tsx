@@ -4,7 +4,7 @@ export default function HomePage() {
   return (
     <div className="space-y-16 sm:space-y-24">
       {/* Hero */}
-      <section className="relative rounded-[var(--radius-2xl)] p-6 sm:p-10 lg:p-14 text-center overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
+      <section className="w-full mx-auto relative rounded-[var(--radius-2xl)] p-6 sm:p-10 lg:p-14 text-center overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
         <div className="relative z-10 space-y-6">
           <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" aria-hidden="true"></span>
@@ -41,7 +41,7 @@ export default function HomePage() {
       </section>
 
       {/* ¿Cómo funciona? */}
-      <section aria-labelledby="como-funciona">
+      <section aria-labelledby="como-funciona" className="w-full mx-auto">
         <h2 id="como-funciona" className="text-2xl sm:text-3xl font-bold text-fg mb-8 text-center">
           ¿Cómo funciona?
         </h2>
@@ -80,7 +80,7 @@ export default function HomePage() {
       </section>
 
       {/* Datos del CESFAM */}
-      <section aria-labelledby="datos-cesfam" className="glass-card rounded-[var(--radius-2xl)] p-5 sm:p-8 lg:p-10">
+      <section aria-labelledby="datos-cesfam" className="w-full mx-auto glass-card rounded-[var(--radius-2xl)] p-5 sm:p-8 lg:p-10">
         <h2 id="datos-cesfam" className="text-2xl font-bold text-fg mb-6">
           Centro de Salud Familiar
         </h2>
