@@ -49,7 +49,7 @@ export default function RegistroPage() {
   }
 
   return (
-    <div className="max-w-md mx-auto py-8 sm:py-12">
+    <div className="flex-1 w-full flex items-center justify-center px-5 sm:px-8 py-10">
       <div className="text-center mb-8">
         <span className="inline-flex h-14 w-14 items-center justify-center rounded-[var(--radius-xl)] bg-secondary-soft text-secondary mb-4" aria-hidden="true">
           <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -70,7 +70,7 @@ export default function RegistroPage() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="glass-card rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-5">
+      <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto glass-card rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-5">
         <Field id="name" label="Nombre completo *" type="text" required value={name} onChange={setName} placeholder="Tu nombre" />
         <Field id="email" label="Email *" type="email" required value={email} onChange={setEmail} placeholder="tu@email.com" />
         <Field id="phone" label="Teléfono (opcional)" type="tel" value={phone} onChange={setPhone} placeholder="+56 9 1234 5678" />
