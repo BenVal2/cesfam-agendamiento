@@ -12,11 +12,10 @@ export default function Navbar() {
   const isAdmin = (session?.user as Record<string, unknown>)?.role === "admin";
 
   return (
-    <header className="sticky top-0 z-50 w-full glass border-b border-nav-border">
-      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10" aria-label="Navegación principal">
-        <div className="flex h-16 w-full items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 text-fg no-underline shrink-0">
+    <header className="sticky top-0 z-50 w-full block glass border-b border-nav-border">
+      <nav className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10" aria-label="Navegación principal">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2.5 text-fg no-underline shrink-0">
             <span className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] bg-gradient-to-br from-primary to-secondary text-white" aria-hidden="true">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
@@ -27,7 +26,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <ul className="hidden md:flex items-center gap-1 text-sm">
+          <ul className="hidden md:flex items-center gap-2 text-sm ml-auto">
             <li><NavLink href="/">Inicio</NavLink></li>
             {session ? (
               <>
@@ -68,7 +67,6 @@ export default function Navbar() {
               <path className="hamburger-line" strokeLinecap="round" d="M4 17h16" />
             </svg>
           </button>
-        </div>
 
         {/* Mobile menu */}
         {open && (

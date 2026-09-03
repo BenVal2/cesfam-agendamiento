@@ -39,7 +39,7 @@ export default function RootLayout({
         <SessionProvider>
           <Navbar />
 
-          <div className="flex-1 w-full flex justify-center">
+          <div className="flex-1 w-full min-w-0">
             <main
               id="contenido-principal"
               className="w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-10 sm:py-14"
@@ -48,10 +48,10 @@ export default function RootLayout({
             </main>
           </div>
 
-          <footer className="w-full border-t border-card-border mt-auto">
-            <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-8">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-fg-muted">
-                <div className="flex items-center gap-2">
+          <footer className="w-full border-t border-card-border mt-auto bg-background/50">
+            <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-6 sm:py-8">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-fg-muted w-full">
+                <div className="flex items-center gap-2 shrink-0">
                   <span className="flex h-7 w-7 items-center justify-center rounded-[var(--radius-sm)] bg-gradient-to-br from-primary to-secondary text-white" aria-hidden="true">
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
@@ -59,7 +59,7 @@ export default function RootLayout({
                   </span>
                   <p>CESFAM &mdash; [Dirección del centro de salud], Comuna, Santiago</p>
                 </div>
-                <p>
+                <p className="sm:text-right shrink-0">
                   Tel: +56 9 0000 0000 &bull;{" "}
                   <a
                     href="mailto:contacto@cesfam.cl"
