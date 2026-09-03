@@ -12,6 +12,7 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:make-admin": "tsx prisma/make-admin.ts",
     "db:studio": "prisma studio",
+    "check:layout": "node scripts/verificar-layout.mjs",
     "postinstall": "prisma generate"
   },
   "prisma": {
