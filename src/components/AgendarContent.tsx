@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Loading from "@/components/Loading";
 
 interface Doctor {
   id: string;
@@ -203,7 +204,7 @@ export default function AgendarContent() {
     } finally { setLoading(false); }
   }
 
-  if (status === "loading") return <div className="text-center py-12 text-fg-muted">Cargando...</div>;
+  if (status === "loading") return <Loading label="Cargando tu sesión..." />;
   if (!session) return null;
 
   if (success) {
@@ -243,7 +244,7 @@ export default function AgendarContent() {
         <section aria-labelledby="paso-doctor">
           <h2 id="paso-doctor" className="text-lg font-semibold text-fg mb-4">Selecciona tu médico</h2>
           {doctors.length === 0 ? (
-            <p className="text-fg-muted">Cargando doctores...</p>
+            <p className="text-center py-10 text-fg-muted">Cargando doctores disponibles...</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {doctors.map((doctor) => {

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Loading from "@/components/Loading";
 
 const DAY_NAMES = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 const DAY_NAMES_FULL = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
@@ -40,7 +41,7 @@ export default function AdminContent() {
     }
   }, [status, role]);
 
-  if (status === "loading" || loading) return <div className="text-center py-12 text-fg-muted">Cargando panel admin...</div>;
+  if (status === "loading" || loading) return <Loading label="Cargando panel de administración..." />;
   if (!session || role !== "admin") return null;
 
   return (
@@ -221,25 +222,35 @@ function DashboardTab({ stats }: { stats: Stats }) {
     <div className="space-y-6">
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {statCards.map((card) => (
-          <div key={card.label} className="glass-card rounded-[var(--radius-xl)] p-4 text-center">
+          <div key={card.label} className="glass-card rounded-[var(--radius-xl)] p-5 text-center relative overflow-hidden">
+            <span className={`absolute left-0 top-0 bottom-0 w-1 ${card.color.replace("text", "bg")}`} aria-hidden="true" />
             <p className={`text-2xl sm:text-3xl font-bold ${card.color}`}>{card.value}</p>
-            <p className="text-xs text-fg-muted mt-1">{card.label}</p>
+            <p className="text-xs text-fg-muted mt-1 font-medium">{card.label}</p>
           </div>
         ))}
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="glass-card rounded-[var(--radius-xl)] p-5">
           <h3 className="font-semibold text-fg mb-4">Citas por doctor</h3>
-          {stats.appointmentsByDoctor.length === 0 ? <p className="text-sm text-fg-muted">Sin datos</p> : (
-            <div className="space-y-2">
-              {stats.appointmentsByDoctor.sort((a, b) => b.count - a.count).map((item) => (
-                <div key={item.doctor.id} className="flex items-center justify-between text-sm">
-                  <div><span className="font-medium text-fg">{item.doctor.name}</span><span className="text-fg-muted ml-2">({item.doctor.specialty})</span></div>
-                  <span className="font-semibold text-primary">{item.count}</span>
-                </div>
-              ))}
-            </div>
-          )}
+          {stats.appointmentsByDoctor.length === 0 ? <p className="text-sm text-fg-muted">Sin datos</p> : (() => {
+            const sorted = [...stats.appointmentsByDoctor].sort((a, b) => b.count - a.count);
+            const max = Math.max(...sorted.map((s) => s.count), 1);
+            return (
+              <div className="space-y-3">
+                {sorted.map((item) => (
+                  <div key={item.doctor.id}>
+                    <div className="flex items-center justify-between text-sm mb-1">
+                      <div><span className="font-medium text-fg">{item.doctor.name}</span><span className="text-fg-muted ml-2">({item.doctor.specialty})</span></div>
+                      <span className="font-semibold text-primary">{item.count}</span>
+                    </div>
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-card-border/70" role="img" aria-label={`${item.doctor.name}: ${item.count} citas`}>
+                      <div className="h-full rounded-full bg-gradient-to-r from-primary to-secondary" style={{ width: `${(item.count / max) * 100}%` }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
         </div>
         <div className="glass-card rounded-[var(--radius-xl)] p-5">
           <h3 className="font-semibold text-fg mb-4">Próximas citas</h3>
