@@ -49,7 +49,8 @@ export default function RegistroPage() {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-12 px-4">
+    <div className="w-full min-h-[calc(100vh-200px)] flex items-center justify-center">
+      <div className="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-12 px-4">
       <div className="text-center md:text-right space-y-4">
         <span className="inline-flex h-14 w-14 items-center justify-center rounded-[var(--radius-xl)] bg-secondary-soft text-secondary" aria-hidden="true">
           <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -91,6 +92,7 @@ export default function RegistroPage() {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 }

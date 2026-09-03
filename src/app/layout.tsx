@@ -41,7 +41,7 @@ export default function RootLayout({
 
           <main
             id="contenido-principal"
-            className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col items-center"
+            className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex-1"
           >
             {children}
           </main>

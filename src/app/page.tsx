@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <div className="space-y-16 sm:space-y-24">
+    <div className="w-full space-y-16 sm:space-y-24 py-8">
       {/* Hero */}
       <section className="w-full mx-auto relative rounded-[var(--radius-2xl)] p-6 sm:p-10 lg:p-14 text-center overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
         <div className="relative z-10 space-y-6">
