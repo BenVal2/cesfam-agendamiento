@@ -4,23 +4,23 @@ export default function HomePage() {
   return (
     <div className="w-full space-y-16 sm:space-y-24 py-8">
       {/* Hero */}
-      <section className="w-full mx-auto relative rounded-[var(--radius-2xl)] p-6 sm:p-10 lg:p-14 text-center overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
+      <section className="w-full mx-auto relative overflow-hidden rounded-[var(--radius-2xl)] px-6 sm:px-10 lg:px-14 py-12 sm:py-16 lg:py-20 text-center" style={{ background: "var(--gradient-hero)" }}>
         <div className="relative z-10 space-y-6">
-          <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide uppercase bg-primary/10 text-primary">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" aria-hidden="true"></span>
-            Atención primaria en línea
+          <span className="inline-flex items-center gap-2 rounded-full bg-card/80 px-4 py-1.5 text-xs font-semibold tracking-wide uppercase text-primary ring-1 ring-primary/20">
+            <span className="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse" aria-hidden="true"></span>
+            Attendes de lunes a viernes &bull; sin filas
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-fg leading-[1.15]">
             Agenda tu hora médica
-            <span className="gradient-text block mt-1">sin filas, sin llamadas</span>
+            <span className="gradient-text block mt-1">en menos de 1 minuto</span>
           </h1>
           <p className="text-lg text-fg-secondary max-w-xl mx-auto leading-relaxed">
-            Reserva tu consulta con los médicos generales de tu centro de salud familiar de forma rápida y sencilla.
+            Reserva tu consulta con los médicos generales de tu centro de salud familiar, de forma rápida, segura y sin hacer llamadas.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <Link
               href="/agendar"
-              className="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-primary px-7 py-3.5 text-base font-semibold text-white shadow-md hover:bg-primary-hover hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all min-h-[48px]"
+              className="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-primary px-7 py-3.5 text-base font-semibold text-white shadow-md hover:bg-primary-hover hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all min-h-[48px]"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
@@ -34,10 +34,24 @@ export default function HomePage() {
               Ver mis citas
             </Link>
           </div>
+
+          <dl className="mx-auto mt-8 grid max-w-2xl grid-cols-2 gap-px overflow-hidden rounded-[var(--radius-xl)] bg-card-border/70 sm:grid-cols-4">
+            {[
+              { k: "Confirma al instante", v: "Respuesta en tiempo real" },
+              { k: "Datos protegidos", v: "Información segura" },
+              { k: "Cero filas", v: "100% en línea" },
+              { k: "Recuerda tu cita", v: "Historial disponible" },
+            ].map((item) => (
+              <div key={item.k} className="flex flex-col gap-0.5 bg-card/80 px-4 py-3">
+                <dt className="order-2 text-xs text-fg-muted">{item.v}</dt>
+                <dd className="order-1 text-sm font-semibold text-fg">{item.k}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
-        {/* Decorative gradient blobs */}
-        <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-primary/5 blur-3xl" aria-hidden="true" />
-        <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-secondary/5 blur-3xl" aria-hidden="true" />
+        {/* Decorative gradient blobs — suaves, no distractivos */}
+        <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-primary/5 blur-3xl" aria-hidden="true" />
+        <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-secondary/5 blur-3xl" aria-hidden="true" />
       </section>
 
       {/* ¿Cómo funciona? */}
@@ -121,15 +135,37 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* CTA final */}
+      <section aria-labelledby="cta-final" className="w-full mx-auto text-center">
+        <div className="glass-card rounded-[var(--radius-2xl)] px-6 py-12 sm:py-14">
+          <h2 id="cta-final" className="text-2xl sm:text-3xl font-bold text-fg">
+            Tu próxima hora médica a un clic
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-fg-secondary">
+            Revisa la disponibilidad de médicos, elige el horario que te acomode y confirma al instante.
+          </p>
+          <Link
+            href="/agendar"
+            className="mt-7 inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-primary px-8 py-3.5 text-base font-semibold text-white shadow-md hover:bg-primary-hover hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all min-h-[48px]"
+          >
+            Agendar mi hora
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
 
 function StepCard({ step, title, description, icon }: { step: string; title: string; description: string; icon: React.ReactNode }) {
   return (
-    <article className="glass-card rounded-[var(--radius-xl)] p-6 relative overflow-hidden">
-      <div className="flex items-start gap-4">
-        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-lg)] bg-primary-soft text-primary" aria-hidden="true">
+    <article className="glass-card rounded-[var(--radius-xl)] p-6 relative overflow-hidden group">
+      <span className="absolute right-4 top-3 text-5xl font-bold text-card-border/60 select-none" aria-hidden="true">{step}</span>
+      <div className="flex items-start gap-4 relative">
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-lg)] bg-primary-soft text-primary transition-transform duration-[var(--duration-normal)] group-hover:scale-110" aria-hidden="true">
           {icon}
         </span>
         <div>
