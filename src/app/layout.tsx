@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${geistSans.variable} h-full antialiased`}>
-      <body className="min-h-screen w-full flex flex-col bg-background text-foreground">
+      <body className="min-h-screen w-full flex flex-col items-center bg-background text-foreground">
         <a href="#contenido-principal" className="skip-link">
           Saltar al contenido
         </a>
@@ -46,7 +46,7 @@ export default function RootLayout({
             {children}
           </main>
 
-          <footer className="w-full border-t border-card-border mt-auto bg-background/50">
+          <footer className="w-full border-t border-card-border mt-auto bg-background/50 flex flex-col items-center">
             <div className="w-full mx-auto max-w-5xl px-5 sm:px-8 lg:px-10 py-6 sm:py-8">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-fg-muted w-full">
                 <div className="flex items-center gap-2 shrink-0">

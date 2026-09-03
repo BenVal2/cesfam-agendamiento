@@ -49,7 +49,8 @@ export default function RegistroPage() {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto py-8 sm:py-12">
+    <div className="w-full flex justify-center py-8 sm:py-12">
+      <div className="w-full max-w-md">
       <div className="text-center mb-8">
         <span className="inline-flex h-14 w-14 items-center justify-center rounded-[var(--radius-xl)] bg-secondary-soft text-secondary mb-4" aria-hidden="true">
           <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -90,6 +91,7 @@ export default function RegistroPage() {
           Inicia sesión
         </Link>
       </p>
+      </div>
     </div>
   );
 }

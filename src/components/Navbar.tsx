@@ -12,8 +12,8 @@ export default function Navbar() {
   const isAdmin = (session?.user as Record<string, unknown>)?.role === "admin";
 
   return (
-    <header className="sticky top-0 z-50 w-full block glass border-b border-nav-border">
-      <nav className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-5 sm:px-8 lg:px-10" aria-label="Navegación principal">
+    <header className="sticky top-0 z-50 w-full flex flex-col items-center glass border-b border-nav-border">
+      <nav className="w-full max-w-5xl mx-auto flex h-16 items-center justify-between px-5 sm:px-8 lg:px-10" aria-label="Navegación principal">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 text-fg no-underline shrink-0">
             <span className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] bg-gradient-to-br from-primary to-secondary text-white" aria-hidden="true">
