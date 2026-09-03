@@ -209,22 +209,25 @@ export default function AgendarContent() {
 
   if (success) {
     return (
-      <div className="max-w-md mx-auto text-center py-12 space-y-6">
-        <div className="w-16 h-16 rounded-full bg-success-bg flex items-center justify-center mx-auto">
-          <svg className="w-8 h-8 text-secondary" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-          </svg>
+        <div className="max-w-md mx-auto text-center py-12 space-y-6">
+          <div className="w-16 h-16 rounded-full bg-success-bg flex items-center justify-center mx-auto ring-2 ring-success-bg">
+            <svg className="w-8 h-8 text-secondary" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            </svg>
+          </div>
+          <div className="space-y-1">
+            <h1 className="text-2xl font-bold text-fg">¡Cita agendada!</h1>
+            <p className="text-sm text-fg-secondary">Recibirás la confirmación de tu hora médica.</p>
+          </div>
+          <dl className="glass-card rounded-[var(--radius-xl)] p-6 text-left space-y-3">
+            <SummaryRow label="Doctor" value={selectedDoctor?.name || ""} />
+            <SummaryRow label="Fecha" value={selectedDate?.toLocaleDateString("es-CL", { weekday: "long", year: "numeric", month: "long", day: "numeric" }) || ""} />
+            <SummaryRow label="Hora" value={selectedTime || ""} />
+          </dl>
+          <Link href="/mis-citas" className="inline-flex items-center gap-2 rounded-[var(--radius-md)] bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-hover hover:shadow-md transition-all min-h-[48px]">
+            Ver mis citas
+          </Link>
         </div>
-        <h1 className="text-2xl font-bold text-fg">¡Cita agendada!</h1>
-        <div className="glass-card rounded-[var(--radius-xl)] p-6 text-left space-y-3">
-          <SummaryRow label="Doctor" value={selectedDoctor?.name || ""} />
-          <SummaryRow label="Fecha" value={selectedDate?.toLocaleDateString("es-CL", { weekday: "long", year: "numeric", month: "long", day: "numeric" }) || ""} />
-          <SummaryRow label="Hora" value={selectedTime || ""} />
-        </div>
-        <Link href="/mis-citas" className="inline-flex items-center gap-2 rounded-[var(--radius-md)] bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[48px]">
-          Ver mis citas
-        </Link>
-      </div>
     );
   }
 
@@ -254,19 +257,27 @@ export default function AgendarContent() {
                   <button
                     key={doctor.id}
                     onClick={() => { setSelectedDoctor(doctor); setStep(2); }}
-                    className="glass-card text-left rounded-[var(--radius-xl)] p-5 hover:border-primary transition-all min-h-[44px]"
+                    className="glass-card group text-left rounded-[var(--radius-xl)] p-5 hover:border-primary hover:-translate-y-0.5 hover:shadow-md transition-all min-h-[44px]"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-full bg-primary-soft flex items-center justify-center shrink-0">
-                        <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                        </svg>
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary text-lg font-bold text-white">
+                        {(() => {
+                          const parts = doctor.name.split(" ").filter((w) => !/^(Dr|Dra|Doctor|Doctora)\.?$/i.test(w));
+                          const initials = parts.slice(0, 2).map((w) => w[0]?.toUpperCase() || "").join("");
+                          return initials || "MD";
+                        })()}
                       </div>
-                      <div>
-                        <h3 className="font-semibold text-fg">{doctor.name}</h3>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-semibold text-fg group-hover:text-primary transition-colors">{doctor.name}</h3>
                         <p className="text-sm text-fg-secondary">{doctor.specialty}</p>
-                        <p className="text-xs text-fg-muted mt-1">{dayList}</p>
+                        <p className="text-xs text-primary mt-1.5 inline-flex items-center gap-1">
+                          <span className="h-1.5 w-1.5 rounded-full bg-secondary" aria-hidden="true"></span>
+                          Disponible: {dayList}
+                        </p>
                       </div>
+                      <svg className="w-5 h-5 text-fg-muted self-center shrink-0 group-hover:text-primary group-hover:translate-x-0.5 transition-all" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                      </svg>
                     </div>
                   </button>
                 );
@@ -318,18 +329,25 @@ export default function AgendarContent() {
           )}
 
           {selectedTime && (
-            <div className="glass-card rounded-[var(--radius-xl)] p-6 space-y-4">
-              <h3 className="font-semibold text-fg">Resumen de tu cita</h3>
-              <div className="space-y-2 text-sm">
+            <div className="glass-card rounded-[var(--radius-xl)] p-6 space-y-5">
+              <div className="flex items-center gap-2 pb-3 border-b border-card-border">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-soft text-secondary" aria-hidden="true">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                  </svg>
+                </span>
+                <h3 className="font-semibold text-fg">Resumen de tu cita</h3>
+              </div>
+              <dl className="space-y-3 text-sm">
                 <SummaryRow label="Doctor" value={selectedDoctor?.name || ""} />
                 <SummaryRow label="Fecha" value={selectedDate?.toLocaleDateString("es-CL", { weekday: "long", year: "numeric", month: "long", day: "numeric" }) || ""} />
                 <SummaryRow label="Hora" value={selectedTime || ""} />
                 <SummaryRow label="Paciente" value={`${session?.user?.name} (${session?.user?.email})`} />
-              </div>
+              </dl>
               <button
                 onClick={handleConfirm}
                 disabled={loading}
-                className="rounded-[var(--radius-md)] bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50 transition-colors min-h-[48px]"
+                className="w-full rounded-[var(--radius-md)] bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-hover hover:shadow-md disabled:opacity-50 transition-all min-h-[48px]"
               >
                 {loading ? "Confirmando..." : "Confirmar cita"}
               </button>
@@ -345,9 +363,9 @@ export default function AgendarContent() {
 
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex justify-between items-start">
-      <span className="font-medium text-fg">{label}</span>
-      <span className="text-fg-secondary text-right ml-4">{value}</span>
+    <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-1 sm:gap-4">
+      <dt className="font-medium text-fg-muted">{label}</dt>
+      <dd className="font-medium text-fg">{value}</dd>
     </div>
   );
 }

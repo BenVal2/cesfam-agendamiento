@@ -63,6 +63,9 @@ export default function RegistroPage() {
         <p className="text-fg-secondary">
           Regístrate para agendar tus citas médicas.
         </p>
+        <p className="text-xs text-fg-muted">
+          Solo necesitamos tus datos básicos. Nada más.
+        </p>
       </div>
 
       {error && (

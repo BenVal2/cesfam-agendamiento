@@ -45,6 +45,9 @@ export default function LoginPage() {
         <p className="text-fg-secondary">
           Ingresa a tu cuenta para agendar y ver tus citas.
         </p>
+        <p className="text-xs text-fg-muted">
+          Tus datos están protegidos y solo los usa tu centro de salud.
+        </p>
       </div>
 
       {error && (
