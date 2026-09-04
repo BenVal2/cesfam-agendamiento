@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Field from "@/components/Field";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -26,7 +28,8 @@ export default function LoginPage() {
       setError("Email o contraseña incorrectos");
       setLoading(false);
     } else {
-      window.location.href = "/agendar";
+      router.push("/agendar");
+      router.refresh();
     }
   }
 
@@ -57,8 +60,8 @@ export default function LoginPage() {
       )}
 
       <form onSubmit={handleSubmit} className="flex w-full flex-col glass-card rounded-[var(--radius-2xl)] p-6 sm:p-8 gap-5">
-        <Field id="email" label="Email" type="email" required value={email} onChange={setEmail} placeholder="tu@email.com" />
-        <Field id="password" label="Contraseña" type="password" required value={password} onChange={setPassword} placeholder="••••••" />
+        <Field id="email" label="Email" type="email" required autoComplete="email" value={email} onChange={setEmail} placeholder="tu@email.com" />
+        <Field id="password" label="Contraseña" type="password" required autoComplete="current-password" value={password} onChange={setPassword} placeholder="••••••" />
         <button
           type="submit"
           disabled={loading}

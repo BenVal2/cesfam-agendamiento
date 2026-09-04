@@ -6,7 +6,7 @@
   --color-bg: #f8fafb;
   --color-fg: #0c1222;
   --color-fg-secondary: #475569;
-  --color-fg-muted: #94a3b8;
+  --color-fg-muted: #64748b;
 
   /* Brand */
   --color-primary: #0d7c8a;
@@ -141,6 +141,14 @@ body {
   color: var(--color-fg);
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   line-height: 1.65;
+}
+
+/* ── Word balance / pretty (evita líneas desfasadas o con 1-2 palabras) ── */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
 }
 
 /* ── Skip Link ── */

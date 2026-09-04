@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Field from "@/components/Field";
 
 export default function RegistroPage() {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -38,9 +40,10 @@ export default function RegistroPage() {
       });
 
       if (loginResult?.error) {
-        window.location.href = "/login";
+        router.push("/login");
       } else {
-        window.location.href = "/agendar";
+        router.push("/agendar");
+        router.refresh();
       }
     } catch (e) {
       setError(e instanceof Error ? e.message : "Error desconocido");
@@ -75,10 +78,10 @@ export default function RegistroPage() {
       )}
 
       <form onSubmit={handleSubmit} className="flex w-full flex-col glass-card rounded-[var(--radius-2xl)] p-6 sm:p-8 gap-5">
-        <Field id="name" label="Nombre completo *" type="text" required value={name} onChange={setName} placeholder="Tu nombre" />
-        <Field id="email" label="Email *" type="email" required value={email} onChange={setEmail} placeholder="tu@email.com" />
-        <Field id="phone" label="Teléfono (opcional)" type="tel" value={phone} onChange={setPhone} placeholder="+56 9 1234 5678" />
-        <Field id="password" label="Contraseña *" type="password" required minLength={6} value={password} onChange={setPassword} placeholder="Mínimo 6 caracteres" />
+        <Field id="name" label="Nombre completo *" type="text" required autoComplete="name" value={name} onChange={setName} placeholder="Tu nombre" />
+        <Field id="email" label="Email *" type="email" required autoComplete="email" value={email} onChange={setEmail} placeholder="tu@email.com" />
+        <Field id="phone" label="Teléfono (opcional)" type="tel" autoComplete="tel" value={phone} onChange={setPhone} placeholder="+56 9 1234 5678" />
+        <Field id="password" label="Contraseña *" type="password" required minLength={6} autoComplete="new-password" value={password} onChange={setPassword} placeholder="Mínimo 6 caracteres" />
         <button
           type="submit"
           disabled={loading}

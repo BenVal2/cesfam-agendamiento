@@ -17,6 +17,20 @@ export const metadata: Metadata = {
   description:
     "Agenda tu hora médica en línea en tu centro de salud familiar. Médicos generales disponibles de lunes a viernes.",
   keywords: ["CESFAM", "agendamiento", "hora médica", "salud"],
+  metadataBase: new URL("https://cesfam-agendamiento.vercel.app"),
+  openGraph: {
+    type: "website",
+    locale: "es_CL",
+    url: "https://cesfam-agendamiento.vercel.app",
+    siteName: "CESFAM",
+    title: "CESFAM - Agendamiento de horas",
+    description:
+      "Agenda tu hora médica en línea en tu centro de salud familiar. Médicos generales disponibles de lunes a viernes.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   other: {
     "Cache-Control": "no-cache, no-store, must-revalidate",
     "Pragma": "no-cache",
