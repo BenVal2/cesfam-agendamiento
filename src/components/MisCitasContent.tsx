@@ -82,7 +82,7 @@ export default function MisCitasContent() {
           </Link>
         </div>
       ) : (
-        <ul className="space-y-3" role="list">
+        <ul className="flex flex-col gap-3" role="list">
           {appointments.map((apt) => {
             const date = new Date(apt.appointmentDate + "T12:00:00");
             const isConfirming = confirmCancelId === apt.id;

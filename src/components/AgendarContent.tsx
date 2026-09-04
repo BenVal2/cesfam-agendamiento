@@ -209,17 +209,17 @@ export default function AgendarContent() {
 
   if (success) {
     return (
-        <div className="max-w-md mx-auto text-center py-12 space-y-6">
+        <div className="flex max-w-md mx-auto flex-col gap-6 py-12 text-center">
           <div className="w-16 h-16 rounded-full bg-success-bg flex items-center justify-center mx-auto ring-2 ring-success-bg">
             <svg className="w-8 h-8 text-secondary" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
             </svg>
           </div>
-          <div className="space-y-1">
+          <div className="flex flex-col gap-1">
             <h1 className="text-2xl font-bold text-fg">¡Cita agendada!</h1>
             <p className="text-sm text-fg-secondary">Recibirás la confirmación de tu hora médica.</p>
           </div>
-          <dl className="glass-card rounded-[var(--radius-xl)] p-6 text-left space-y-3">
+          <dl className="flex flex-col glass-card rounded-[var(--radius-xl)] p-6 gap-3 text-left">
             <SummaryRow label="Doctor" value={selectedDoctor?.name || ""} />
             <SummaryRow label="Fecha" value={selectedDate?.toLocaleDateString("es-CL", { weekday: "long", year: "numeric", month: "long", day: "numeric" }) || ""} />
             <SummaryRow label="Hora" value={selectedTime || ""} />
@@ -329,7 +329,7 @@ export default function AgendarContent() {
           )}
 
           {selectedTime && (
-            <div className="glass-card rounded-[var(--radius-xl)] p-6 space-y-5">
+            <div className="flex flex-col glass-card rounded-[var(--radius-xl)] p-6 gap-5">
               <div className="flex items-center gap-2 pb-3 border-b border-card-border">
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-soft text-secondary" aria-hidden="true">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
@@ -338,7 +338,7 @@ export default function AgendarContent() {
                 </span>
                 <h3 className="font-semibold text-fg">Resumen de tu cita</h3>
               </div>
-              <dl className="space-y-3 text-sm">
+              <dl className="flex flex-col gap-3 text-sm">
                 <SummaryRow label="Doctor" value={selectedDoctor?.name || ""} />
                 <SummaryRow label="Fecha" value={selectedDate?.toLocaleDateString("es-CL", { weekday: "long", year: "numeric", month: "long", day: "numeric" }) || ""} />
                 <SummaryRow label="Hora" value={selectedTime || ""} />

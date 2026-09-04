@@ -71,7 +71,7 @@ export default function Navbar() {
         {/* Mobile menu */}
         {open && (
           <div className="md:hidden absolute left-0 right-0 top-16 border-b border-nav-border bg-nav-bg backdrop-blur-xl pb-4 pt-2 shadow-lg z-40">
-            <ul className="space-y-1 w-full max-w-5xl mx-auto px-4">
+            <ul className="flex w-full max-w-5xl mx-auto flex-col gap-1 px-4">
               <li><MobileLink href="/" onClick={() => setOpen(false)}>Inicio</MobileLink></li>
               {session ? (
                 <>

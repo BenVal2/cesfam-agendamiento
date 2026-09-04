@@ -56,7 +56,7 @@ export default function LoginPage() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="w-full glass-card rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-5">
+      <form onSubmit={handleSubmit} className="flex w-full flex-col glass-card rounded-[var(--radius-2xl)] p-6 sm:p-8 gap-5">
         <Field id="email" label="Email" type="email" required value={email} onChange={setEmail} placeholder="tu@email.com" />
         <Field id="password" label="Contraseña" type="password" required value={password} onChange={setPassword} placeholder="••••••" />
         <button

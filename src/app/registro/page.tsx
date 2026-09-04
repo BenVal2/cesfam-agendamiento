@@ -74,7 +74,7 @@ export default function RegistroPage() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="w-full glass-card rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-5">
+      <form onSubmit={handleSubmit} className="flex w-full flex-col glass-card rounded-[var(--radius-2xl)] p-6 sm:p-8 gap-5">
         <Field id="name" label="Nombre completo *" type="text" required value={name} onChange={setName} placeholder="Tu nombre" />
         <Field id="email" label="Email *" type="email" required value={email} onChange={setEmail} placeholder="tu@email.com" />
         <Field id="phone" label="Teléfono (opcional)" type="tel" value={phone} onChange={setPhone} placeholder="+56 9 1234 5678" />

@@ -104,7 +104,7 @@ function DoctoresTab({ doctors, setDoctors, setError }: { doctors: Doctor[]; set
         <button onClick={() => { resetForm(); setShowForm(true); }} className="rounded-[var(--radius-md)] bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px]">+ Nuevo doctor</button>
       </div>
       {showForm && (
-        <div className="mb-6 glass-card rounded-[var(--radius-xl)] p-5 space-y-4">
+        <div className="mb-6 flex flex-col glass-card rounded-[var(--radius-xl)] p-5 gap-4">
           <h3 className="font-medium text-fg">{editingId ? "Editar doctor" : "Nuevo doctor"}</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div><label htmlFor="doc-name" className="block text-sm font-medium text-fg mb-1.5">Nombre</label><input id="doc-name" type="text" value={name} onChange={(e) => setName(e.target.value)} className={inputClass} placeholder="Dr. Nombre Apellido" /></div>
@@ -116,7 +116,7 @@ function DoctoresTab({ doctors, setDoctors, setError }: { doctors: Doctor[]; set
           </div>
         </div>
       )}
-      <div className="space-y-3">
+      <div className="flex flex-col gap-3">
         {doctors.map((doctor) => (
           <div key={doctor.id} className={`glass-card rounded-[var(--radius-xl)] p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${!doctor.active ? "opacity-60" : ""}`}>
             <div>
@@ -169,7 +169,7 @@ function HorariosTab({ doctors, slots, setSlots, setError }: { doctors: Doctor[]
         <button onClick={() => setShowForm(true)} className="rounded-[var(--radius-md)] bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px]">+ Nuevo horario</button>
       </div>
       {showForm && (
-        <div className="mb-6 glass-card rounded-[var(--radius-xl)] p-5 space-y-4">
+        <div className="mb-6 flex flex-col glass-card rounded-[var(--radius-xl)] p-5 gap-4">
           <h3 className="font-medium text-fg">Nuevo horario</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div><label htmlFor="slot-doctor" className="block text-sm font-medium text-fg mb-1.5">Doctor</label><select id="slot-doctor" value={doctorId} onChange={(e) => setDoctorId(e.target.value)} className={inputClass}><option value="">Seleccionar...</option>{doctors.filter((d) => d.active).map((d) => <option key={d.id} value={d.id}>{d.name}</option>)}</select></div>
@@ -184,7 +184,7 @@ function HorariosTab({ doctors, slots, setSlots, setError }: { doctors: Doctor[]
           </div>
         </div>
       )}
-      <div className="space-y-4">
+      <div className="flex flex-col gap-4">
         {Object.values(groupedByDoctor).map(({ doctor, slots: doctorSlots }) => (
           <div key={doctor.id} className="glass-card rounded-[var(--radius-xl)] p-5">
             <h3 className="font-semibold text-fg mb-3">{doctor.name}</h3>
@@ -219,7 +219,7 @@ function DashboardTab({ stats }: { stats: Stats }) {
     { label: "Canceladas", value: stats.cancelledAppointments, color: "text-danger" },
   ];
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6">
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {statCards.map((card) => (
           <div key={card.label} className="glass-card rounded-[var(--radius-xl)] p-5 text-center relative overflow-hidden">
@@ -236,7 +236,7 @@ function DashboardTab({ stats }: { stats: Stats }) {
             const sorted = [...stats.appointmentsByDoctor].sort((a, b) => b.count - a.count);
             const max = Math.max(...sorted.map((s) => s.count), 1);
             return (
-              <div className="space-y-3">
+              <div className="flex flex-col gap-3">
                 {sorted.map((item) => (
                   <div key={item.doctor.id}>
                     <div className="flex items-center justify-between text-sm mb-1">
@@ -255,7 +255,7 @@ function DashboardTab({ stats }: { stats: Stats }) {
         <div className="glass-card rounded-[var(--radius-xl)] p-5">
           <h3 className="font-semibold text-fg mb-4">Próximas citas</h3>
           {stats.recentAppointments.length === 0 ? <p className="text-sm text-fg-muted">Sin citas programadas</p> : (
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               {stats.recentAppointments.map((appt) => (
                 <div key={appt.id} className="flex items-center justify-between text-sm py-2 border-b border-card-border last:border-0">
                   <div><span className="font-medium text-fg">{appt.user.name}</span><span className="text-fg-muted ml-2">→ {appt.doctor.name}</span></div>

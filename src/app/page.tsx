@@ -2,10 +2,10 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <div className="w-full space-y-16 sm:space-y-24 py-8">
+    <div className="flex w-full flex-col gap-16 py-8 sm:gap-24">
       {/* Hero */}
       <section className="w-full mx-auto relative overflow-hidden rounded-[var(--radius-2xl)] px-6 sm:px-10 lg:px-14 py-12 sm:py-16 lg:py-20 text-center" style={{ background: "var(--gradient-hero)" }}>
-        <div className="relative z-10 space-y-6">
+        <div className="relative z-10 flex flex-col gap-6">
           <span className="inline-flex items-center gap-2 rounded-full bg-card/80 px-4 py-1.5 text-xs font-semibold tracking-wide uppercase text-primary ring-1 ring-primary/20">
             <span className="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse" aria-hidden="true"></span>
             Attendes de lunes a viernes &bull; sin filas
@@ -99,7 +99,7 @@ export default function HomePage() {
           Centro de Salud Familiar
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 text-sm">
-          <div className="space-y-4">
+          <div className="flex flex-col gap-4">
             <InfoRow
               icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>}
               label="Dirección"
@@ -116,7 +116,7 @@ export default function HomePage() {
               value={<a href="mailto:contacto@cesfam.cl" className="text-primary hover:underline">contacto@cesfam.cl</a>}
             />
           </div>
-          <div className="space-y-4">
+          <div className="flex flex-col gap-4">
             <InfoRow
               icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>}
               label="Horario de atención"
