@@ -1,0 +1,8 @@
+{
+  "name": "CESFAM - Agendamiento de horas",
+  "description": "Sistema de agendamiento de horas médicas en línea para centro de salud familiar.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

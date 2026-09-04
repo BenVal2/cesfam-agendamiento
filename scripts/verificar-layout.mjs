@@ -30,12 +30,6 @@ const CHROMIUM =
 const MEDIR_HTML = path.join(ROOT, "public", "medir.html");
 const URL_BASE = `http://localhost:${PORT}`;
 
-const PAGES = [
-  { route: "/", label: "/ (Inicio)", sel: "main, nav, footer>div" },
-  { route: "/login", label: "/login", sel: "form" },
-  { route: "/registro", label: "/registro", sel: "form" },
-];
-
 function waitFor(url, tries = 60) {
   return new Promise((resolve, reject) => {
     const ok = () => {
@@ -60,7 +54,7 @@ function waitFor(url, tries = 60) {
   });
 }
 
-function measurePage(html) {
+function measurePage() {
   return new Promise((resolve, reject) => {
     try {
       const dom = execSync(
@@ -115,9 +109,6 @@ async function launch() {
   }
 
   console.log(`▶ Servidor listo. Midiendo layout a ${VIEWPORT}px de ancho...\n`);
-  for (const p of PAGES) {
-    // La página de medición ya barre todas las rutas; mostramos por pasadas.
-  }
   try {
     const raw = await measurePage();
     const lines = raw.split("\n");
