@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -25,6 +26,7 @@ export default function Navbar() {
 
           <ul className="hidden md:flex items-center gap-1 text-sm">
             <li><NavLink href="/">Inicio</NavLink></li>
+            <li className="flex items-center"><ThemeToggle /></li>
             {session ? (
               <>
                 <li><NavLink href="/agendar">Agendar</NavLink></li>
@@ -51,18 +53,21 @@ export default function Navbar() {
             )}
           </ul>
 
-          <button
-            onClick={() => setOpen(!open)}
-            className="md:hidden flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] hover:bg-card-hover transition-colors"
-            aria-label={open ? "Cerrar menú" : "Abrir menú"}
-            aria-expanded={open}
-          >
-            <svg className="w-5 h-5 text-fg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" d="M4 7h16" />
-              <path strokeLinecap="round" d="M4 12h16" />
-              <path strokeLinecap="round" d="M4 17h16" />
-            </svg>
-          </button>
+          <div className="md:hidden flex items-center gap-1">
+            <ThemeToggle />
+            <button
+              onClick={() => setOpen(!open)}
+              className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] hover:bg-card-hover transition-colors"
+              aria-label={open ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={open}
+            >
+              <svg className="w-5 h-5 text-fg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" d="M4 7h16" />
+                <path strokeLinecap="round" d="M4 12h16" />
+                <path strokeLinecap="round" d="M4 17h16" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {open && (

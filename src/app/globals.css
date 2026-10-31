@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Tema manual: la clase .dark en <html> manda sobre la preferencia del
+   sistema. Sin clase, se sigue la preferencia del SO. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ── Design Tokens — "institucional legible" ──
    Papel + tinta + azul de timbre. Los tokens se definen en @theme para que
    Tailwind genere las utilidades (bg-primary, text-fg, bg-nav-bg, etc.). */
@@ -64,10 +68,10 @@
   --font-sans: var(--font-atkinson), system-ui, -apple-system, sans-serif;
 }
 
-/* ── Dark Mode (nativo, según preferencia del sistema) ── */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #211d1a;
+/* ── Dark Mode ── */
+.dark {
+  color-scheme: dark;
+  --color-bg: #211d1a;
     --color-bg-elevated: #2a2522;
     --color-fg: #f5f1e8;
     --color-fg-secondary: #d6d0c4;
@@ -106,8 +110,10 @@
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
     --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
-  }
 }
+
+/* Color scheme nativo para controles del navegador */
+:root { color-scheme: light; }
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; }

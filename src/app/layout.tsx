@@ -26,8 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${atkinson.variable} h-full antialiased`}>
+    <html lang="es" className={`${atkinson.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-screen flex flex-col">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=null;try{t=localStorage.getItem("theme")}catch(e){}if(!t){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}var d=t==="dark";document.documentElement.classList.toggle("dark",d);document.documentElement.style.colorScheme=t}catch(e){}})();`,
+          }}
+        />
         <a href="#contenido-principal" className="skip-link">
           Saltar al contenido
         </a>
