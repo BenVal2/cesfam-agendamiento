@@ -11,6 +11,7 @@ import { Alert } from "@/components/ui/Alert";
 import { Doctor } from "@/types";
 import { DAY_NAMES_SHORT } from "@/lib/constants";
 import { formatChileanDate, formatTime } from "@/lib/utils";
+import { hasBookableSlotToday, weekday, clinicNow } from "@/lib/clinic-time";
 
 export default function AgendarContent() {
   const { data: session, status } = useSession();
@@ -22,6 +23,8 @@ export default function AgendarContent() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [availableTimes, setAvailableTimes] = useState<string[]>([]);
+  const [availabilityNote, setAvailabilityNote] = useState<string | null>(null);
+  const [loadingTimes, setLoadingTimes] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
@@ -50,6 +53,10 @@ export default function AgendarContent() {
     return days;
   }, [selectedDoctor])();
 
+  const todayBookable = selectedDoctor?.availableSlots?.length
+    ? hasBookableSlotToday(selectedDoctor.availableSlots as { startTime: string; endTime: string; durationMinutes: number }[], weekday(clinicNow().date))
+    : false;
+
   useEffect(() => {
     if (!selectedDoctor || !selectedDate) return;
     const dateStr = selectedDate.toISOString().split("T")[0];
@@ -60,12 +67,17 @@ export default function AgendarContent() {
       .then((data) => {
         if (!isCancelled) {
           setAvailableTimes(data.availableTimes || []);
+          setAvailabilityNote(data.note || null);
         }
       })
       .catch(() => {
         if (!isCancelled) {
           setAvailableTimes([]);
+          setAvailabilityNote("No se pudieron cargar las horas. Intenta nuevamente.");
         }
+      })
+      .finally(() => {
+        if (!isCancelled) setLoadingTimes(false);
       });
 
     return () => {
@@ -265,9 +277,13 @@ export default function AgendarContent() {
               onSelect={(d) => {
                 setSelectedDate(d);
                 setSelectedTime(null);
+                setAvailableTimes([]);
+                setAvailabilityNote(null);
+                setLoadingTimes(true);
                 setStep(3);
               }}
               availableDays={availableDays}
+              todayBookable={todayBookable}
             />
           </div>
         </section>
@@ -298,9 +314,11 @@ export default function AgendarContent() {
             </div>
           </div>
 
-          {availableTimes.length === 0 ? (
+          {loadingTimes ? (
+            <p className="text-center text-fg-muted py-8" role="status">Buscando horas disponibles...</p>
+          ) : availableTimes.length === 0 ? (
             <div className="glass-card rounded-[var(--radius-xl)] p-8 text-center text-fg-muted">
-              <p className="font-medium">No hay horas disponibles para esta fecha.</p>
+              <p className="font-medium">{availabilityNote || "No hay horas disponibles para esta fecha."}</p>
               <button
                 type="button"
                 onClick={() => setStep(2)}

@@ -10,6 +10,7 @@ import { Alert } from "@/components/ui/Alert";
 import { Modal } from "@/components/ui/Modal";
 import { Appointment } from "@/types";
 import { formatChileanDate, formatTime } from "@/lib/utils";
+import { BOOKING_CUTOFF_MINUTES, clinicNow, fromDbDate, minutesOf } from "@/lib/clinic-time";
 import { APPOINTMENT_STATUS_LABELS } from "@/lib/constants";
 
 export default function MisCitasContent() {
@@ -54,7 +55,10 @@ export default function MisCitasContent() {
       const res = await fetch(`/api/citas?id=${appointmentToCancel.id}`, {
         method: "DELETE",
       });
-      if (!res.ok) throw new Error("Error al cancelar la cita");
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Error al cancelar la cita");
+      }
 
       // Update local state to show cancelled or filter out
       setAppointments((prev) =>
@@ -134,6 +138,13 @@ export default function MisCitasContent() {
           {appointments.map((apt) => {
             const isCancelled = apt.status === "cancelled";
             const badgeVariant = isCancelled ? "danger" : "success";
+            const clinic = clinicNow();
+            const aptDate = fromDbDate(apt.appointmentDate);
+            const canCancel =
+              aptDate > clinic.date ||
+              (aptDate === clinic.date &&
+                minutesOf(apt.appointmentTime) - clinic.minutes >=
+                  BOOKING_CUTOFF_MINUTES);
 
             return (
               <li
@@ -182,13 +193,20 @@ export default function MisCitasContent() {
 
                 {!isCancelled && (
                   <div className="flex sm:flex-col items-end justify-end shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-card-border">
-                    <button
-                      type="button"
-                      onClick={() => setAppointmentToCancel(apt)}
-                      className="text-xs font-medium text-danger hover:bg-danger-soft px-3 py-2 rounded-[var(--radius-md)] transition-colors min-h-[44px] cursor-pointer"
-                    >
-                      Cancelar cita
-                    </button>
+                    {canCancel ? (
+                      <button
+                        type="button"
+                        onClick={() => setAppointmentToCancel(apt)}
+                        disabled={isCancelling}
+                        className="text-xs font-medium text-danger hover:bg-danger-soft px-3 py-2 rounded-[var(--radius-md)] transition-colors min-h-[44px] cursor-pointer"
+                      >
+                        Cancelar cita
+                      </button>
+                    ) : (
+                      <p className="text-xs text-fg-muted text-right max-w-[11rem] px-2" title="Las cancelaciones cierran 2 horas antes de la atención">
+                        Ya no se puede cancelar en línea.
+                      </p>
+                    )}
                   </div>
                 )}
               </li>

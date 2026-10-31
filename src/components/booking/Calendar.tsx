@@ -2,11 +2,13 @@
 
 import React, { useState } from "react";
 import { MONTH_NAMES } from "@/lib/constants";
+import { BOOKING_WINDOW_DAYS, clinicNow, holidayName, weekday } from "@/lib/clinic-time";
 
 interface CalendarProps {
   selectedDate: Date | null;
   onSelect: (d: Date) => void;
   availableDays: Set<number>;
+  todayBookable?: boolean;
 }
 
 const WEEKDAY_HEADERS = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
@@ -15,36 +17,33 @@ export function Calendar({
   selectedDate,
   onSelect,
   availableDays,
+  todayBookable = true,
 }: CalendarProps) {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const { date: today } = clinicNow();
+  const maxDate = new Date(today + "T00:00:00.000Z");
+  maxDate.setUTCDate(maxDate.getUTCDate() + BOOKING_WINDOW_DAYS);
+  const maxStr = maxDate.toISOString().slice(0, 10);
 
-  const [viewMonth, setViewMonth] = useState(today.getMonth());
-  const [viewYear, setViewYear] = useState(today.getFullYear());
+  const [viewMonth, setViewMonth] = useState(Number(today.slice(5, 7)) - 1);
+  const [viewYear, setViewYear] = useState(Number(today.slice(0, 4)));
 
-  const firstDay = new Date(viewYear, viewMonth, 1).getDay();
-  const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+  const firstDay = new Date(Date.UTC(viewYear, viewMonth, 1)).getUTCDay();
+  const daysInMonth = new Date(Date.UTC(viewYear, viewMonth + 1, 0)).getUTCDate();
 
   const cells: (number | null)[] = [];
   for (let i = 0; i < firstDay; i++) cells.push(null);
   for (let d = 1; d <= daysInMonth; d++) cells.push(d);
 
-  function handlePrevMonth() {
-    if (viewMonth === 0) {
-      setViewMonth(11);
-      setViewYear((y) => y - 1);
-    } else {
-      setViewMonth((m) => m - 1);
-    }
-  }
+  const currentMonthKey = Number(today.slice(0, 4)) * 12 + (Number(today.slice(5, 7)) - 1);
+  const viewKey = viewYear * 12 + viewMonth;
+  const maxMonthKey = Number(maxStr.slice(0, 4)) * 12 + (Number(maxStr.slice(5, 7)) - 1);
+  const canPrev = viewKey > currentMonthKey;
+  const canNext = viewKey < maxMonthKey;
 
-  function handleNextMonth() {
-    if (viewMonth === 11) {
-      setViewMonth(0);
-      setViewYear((y) => y + 1);
-    } else {
-      setViewMonth((m) => m + 1);
-    }
+  function moveMonth(delta: number) {
+    const next = new Date(Date.UTC(viewYear, viewMonth + delta, 1));
+    setViewYear(next.getUTCFullYear());
+    setViewMonth(next.getUTCMonth());
   }
 
   return (
@@ -52,8 +51,9 @@ export function Calendar({
       <div className="flex items-center justify-between mb-4">
         <button
           type="button"
-          onClick={handlePrevMonth}
-          className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] hover:bg-card-hover transition-colors"
+          onClick={() => canPrev && moveMonth(-1)}
+          disabled={!canPrev}
+          className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] hover:bg-card-hover transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
           aria-label="Mes anterior"
         >
           <svg className="w-5 h-5 text-fg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -67,8 +67,9 @@ export function Calendar({
 
         <button
           type="button"
-          onClick={handleNextMonth}
-          className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] hover:bg-card-hover transition-colors"
+          onClick={() => canNext && moveMonth(1)}
+          disabled={!canNext}
+          className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] hover:bg-card-hover transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
           aria-label="Mes siguiente"
         >
           <svg className="w-5 h-5 text-fg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -88,24 +89,45 @@ export function Calendar({
       <div className="grid grid-cols-7 gap-1 text-sm">
         {cells.map((day, idx) => {
           if (!day) return <div key={`empty-${idx}`} />;
-          const cellDate = new Date(viewYear, viewMonth, day);
-          cellDate.setHours(0, 0, 0, 0);
 
-          const isPast = cellDate < today;
-          const isAvailable = availableDays.has(cellDate.getDay()) && !isPast;
+          const mm = String(viewMonth + 1).padStart(2, "0");
+          const dd = String(day).padStart(2, "0");
+          const dateStr = `${viewYear}-${mm}-${dd}`;
+
+          const isPast = dateStr < today;
+          const isBeyond = dateStr > maxStr;
+          const holiday = holidayName(dateStr);
+          const noAttention = !availableDays.has(weekday(dateStr));
+          const isTodayBlocked = dateStr === today && !todayBookable;
+          const isAvailable = !isPast && !isBeyond && !holiday && !noAttention && !isTodayBlocked;
+
           const isSelected =
-            selectedDate &&
-            selectedDate.getFullYear() === cellDate.getFullYear() &&
-            selectedDate.getMonth() === cellDate.getMonth() &&
-            selectedDate.getDate() === day;
+            selectedDate && selectedDate.toISOString().slice(0, 10) === dateStr;
+
+          const reason = holiday
+            ? `Feriado: ${holiday}`
+            : isPast
+              ? "Fecha pasada"
+              : isBeyond
+                ? `Solo se puede agendar hasta ${BOOKING_WINDOW_DAYS} días adelante`
+                : noAttention
+                  ? "El profesional no atiende este día"
+                  : isTodayBlocked
+                    ? "Ya no quedan horas para hoy"
+                    : undefined;
 
           return (
             <button
               key={day}
               type="button"
               disabled={!isAvailable}
-              onClick={() => onSelect(cellDate)}
-              className={`h-10 w-full rounded-[var(--radius-md)] text-sm font-medium transition-all ${
+              onClick={() => {
+                if (!isAvailable) return;
+                onSelect(new Date(dateStr + "T00:00:00.000Z"));
+              }}
+              title={reason}
+              aria-label={`${day} de ${MONTH_NAMES[viewMonth]}${reason ? ". " + reason : ", disponible"}`}
+              className={`h-11 w-full rounded-[var(--radius-md)] text-sm font-medium transition-all ${
                 isSelected
                   ? "bg-primary text-white shadow-sm font-bold ring-2 ring-primary/30"
                   : isAvailable
@@ -118,6 +140,11 @@ export function Calendar({
           );
         })}
       </div>
+
+      <p className="mt-3 text-xs text-fg-muted">
+        Feriados y días sin atención no se pueden seleccionar. Agenda hasta{" "}
+        {BOOKING_WINDOW_DAYS} días adelante.
+      </p>
     </div>
   );
 }

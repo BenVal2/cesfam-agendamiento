@@ -49,11 +49,13 @@ model Appointment {
   user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   doctorId        String
   doctor          Doctor    @relation(fields: [doctorId], references: [id], onDelete: Cascade)
-  appointmentDate DateTime
+  appointmentDate DateTime   @db.Date
   appointmentTime String
-  status          String    @default("confirmed")
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  status          String     @default("confirmed")
+  slotKey         String?    @unique
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
 
-  @@unique([doctorId, appointmentDate, appointmentTime])
+  @@index([doctorId, appointmentDate, appointmentTime])
+  @@index([appointmentDate, status])
 }

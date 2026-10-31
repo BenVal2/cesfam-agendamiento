@@ -1,48 +1,47 @@
 @import "tailwindcss";
 
-/* ── Design Tokens ── */
-@theme {
-  /* Color palette — Light (CESFAM) */
-  --color-bg: #f8fafb;
-  --color-fg: #0c1222;
-  --color-fg-secondary: #475569;
-  --color-fg-muted: #64748b;
+/* ── Design Tokens — "institucional legible" ──
+   Papel + tinta + azul de timbre. Una sola superficie elevada (el comprobante)
+   y un solo gesto animado (el sello "Confirmada"). */
+:root {
+  --bg: #f5f1e8;
+  --bg-elevated: #fbf8f1;
+  --fg: #1c1917;
+  --fg-secondary: #44403c;
+  --fg-muted: #78716c;
 
-  /* Brand */
-  --color-primary: #0d7c8a;
-  --color-primary-hover: #0a6670;
-  --color-primary-soft: #e0f5f7;
-  --color-secondary: #10b981;
-  --color-secondary-soft: #ecfdf5;
-  --color-danger: #dc2626;
-  --color-danger-hover: #b91c1c;
-  --color-danger-soft: #fef2f2;
+  --primary: #1e3a8a;
+  --primary-hover: #1e3270;
+  --primary-soft: #e8ecf7;
+  --primary-glow: rgba(30, 58, 138, 0.12);
+  --secondary: #15803d;
+  --secondary-soft: #ecf5ee;
+  --danger: #991b1b;
+  --danger-hover: #7f1d1d;
+  --danger-soft: #fbe9e9;
 
-  /* Surfaces */
-  --color-card: #ffffff;
-  --color-card-border: #e8ecf0;
-  --color-card-hover: #f0f7f8;
-  --color-nav-bg: rgba(255, 255, 255, 0.82);
-  --color-nav-border: #e8ecf0;
+  --card: #ffffff;
+  --card-border: #d6d0c4;
+  --card-hover: #f0ece2;
+  --nav-bg: #f5f1e8;
+  --nav-border: #d6d0c4;
 
-  /* Inputs */
-  --color-input-bg: #f8fafb;
-  --color-input-border: #d1d9e0;
-  --color-input-focus: #0d7c8a;
-  --color-input-ring: rgba(13, 124, 138, 0.25);
+  --input-bg: #fbf8f1;
+  --input-border: #b8b0a0;
+  --input-focus: #1e3a8a;
+  --input-ring: rgba(30, 58, 138, 0.2);
 
-  /* Semantic */
-  --color-success-bg: #ecfdf5;
-  --color-success-fg: #065f46;
+  --success-bg: #ecf5ee;
+  --success-fg: #14532d;
+  --error-bg: #fbe9e9;
+  --error-fg: #7f1d1d;
 
-  /* Ambient shadows (not flat) */
-  --shadow-xs: 0 1px 2px rgba(12, 18, 34, 0.04);
-  --shadow-sm: 0 1px 3px rgba(12, 18, 34, 0.06), 0 1px 2px rgba(12, 18, 34, 0.04);
-  --shadow-md: 0 4px 12px rgba(12, 18, 34, 0.07), 0 2px 4px rgba(12, 18, 34, 0.04);
-  --shadow-lg: 0 12px 32px rgba(12, 18, 34, 0.08), 0 4px 8px rgba(12, 18, 34, 0.04);
-  --shadow-glow: 0 0 0 3px rgba(13, 124, 138, 0.25);
+  --shadow-xs: 0 1px 1px rgba(28, 25, 23, 0.04);
+  --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.06);
+  --shadow-md: 0 4px 10px rgba(28, 25, 23, 0.08);
+  --shadow-lg: 0 16px 40px rgba(28, 25, 23, 0.12);
+  --shadow-glow: 0 0 0 3px var(--input-ring);
 
-  /* Spacing scale (4px base) */
   --sp-1: 0.25rem;
   --sp-2: 0.5rem;
   --sp-3: 0.75rem;
@@ -56,109 +55,97 @@
   --sp-20: 5rem;
   --sp-24: 6rem;
 
-  /* Border radius */
-  --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.25rem;
-  --radius-2xl: 1.5rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
   --radius-full: 9999px;
 
-  /* Gradients */
-  --gradient-hero: linear-gradient(135deg, #e0f5f7 0%, #f0f9ff 40%, #ecfdf5 100%);
-  --gradient-card: linear-gradient(180deg, var(--color-card) 0%, var(--color-card) 100%);
-  --gradient-primary: linear-gradient(135deg, #0d7c8a, #10b981);
-}
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
 
-:root {
-  /* Transitions */
+  --gradient-hero: none;
+  --gradient-card: none;
+  --gradient-primary: none;
+
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-fast: 150ms;
   --duration-normal: 250ms;
   --duration-slow: 400ms;
-
-  /* Font */
-  --font-geist-sans: "Geist", system-ui, -apple-system, sans-serif;
 }
 
-@theme inline {
-  /* Semantic aliases (resuelven al tema dark automáticamente) */
-  --color-background: var(--color-bg);
-  --color-foreground: var(--color-fg);
-}
-
-/* ── Dark Mode (native) ── */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #0b1120;
-    --color-fg: #e8ecf0;
-    --color-fg-secondary: #94a3b8;
-    --color-fg-muted: #64748b;
+    --bg: #1c1917;
+    --bg-elevated: #292524;
+    --fg: #f5f1e8;
+    --fg-secondary: #d6d0c4;
+    --fg-muted: #a8a29e;
 
-    --color-primary: #22d3ee;
-    --color-primary-hover: #67e8f9;
-    --color-primary-soft: #083344;
-    --color-secondary: #34d399;
-    --color-secondary-soft: #064e3b;
-    --color-danger: #f87171;
-    --color-danger-hover: #fca5a5;
-    --color-danger-soft: #450a0a;
+    --primary: #93b4ff;
+    --primary-hover: #b4ccff;
+    --primary-soft: #1e2a4a;
+    --primary-glow: rgba(147, 180, 255, 0.15);
+    --secondary: #6ee7b7;
+    --secondary-soft: #14332a;
+    --danger: #fca5a5;
+    --danger-hover: #f87171;
+    --danger-soft: #3b1212;
 
-    --color-card: #131c2e;
-    --color-card-border: #1e293b;
-    --color-card-hover: #1a2540;
-    --color-nav-bg: rgba(11, 17, 32, 0.85);
-    --color-nav-border: #1e293b;
+    --card: #292524;
+    --card-border: #44403c;
+    --card-hover: #332f2c;
+    --nav-bg: #1c1917;
+    --nav-border: #44403c;
 
-    --color-input-bg: #0f1729;
-    --color-input-border: #293548;
-    --color-input-focus: #22d3ee;
-    --color-input-ring: rgba(34, 211, 238, 0.2);
+    --input-bg: #292524;
+    --input-border: #57534e;
+    --input-focus: #93b4ff;
+    --input-ring: rgba(147, 180, 255, 0.2);
 
-    --color-success-bg: #064e3b;
-    --color-success-fg: #6ee7b7;
+    --success-bg: #14332a;
+    --success-fg: #6ee7b7;
+    --error-bg: #3b1212;
+    --error-fg: #fca5a5;
 
-    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
-    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0, 0, 0, 0.2);
+    --shadow-xs: 0 1px 1px rgba(0, 0, 0, 0.3);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 0 3px var(--input-ring);
 
-    --gradient-hero: linear-gradient(135deg, #083344 0%, #0f1729 40%, #064e3b 100%);
-    --gradient-primary: linear-gradient(135deg, #22d3ee, #34d399);
+    --gradient-hero: none;
+    --gradient-card: none;
+    --gradient-primary: none;
   }
 }
 
-/* ── Reset ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; }
+*, *::before, *::after { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
-  background: var(--color-bg);
-  color: var(--color-fg);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-  line-height: 1.65;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-atkinson), system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
 }
 
-/* ── Word balance / pretty (evita líneas desfasadas o con 1-2 palabras) ── */
-h1, h2, h3, h4 {
-  text-wrap: balance;
-}
-p {
-  text-wrap: pretty;
-}
-
-/* ── Skip Link ── */
 .skip-link {
   position: absolute;
   top: -100%;
   left: var(--sp-4);
   padding: var(--sp-3) var(--sp-5);
-  background: var(--color-primary);
-  color: var(--color-bg);
+  background: var(--primary);
+  color: var(--bg);
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   z-index: 100;
   font-weight: 600;
@@ -167,14 +154,12 @@ p {
 }
 .skip-link:focus { top: 0; }
 
-/* ── Focus ring (WCAG) ── */
 :focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
 
-/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -184,42 +169,67 @@ p {
   }
 }
 
-/* ── Utility classes ── */
-.glass {
-  background: var(--color-nav-bg);
-  backdrop-filter: blur(16px) saturate(1.4);
-  -webkit-backdrop-filter: blur(16px) saturate(1.4);
-}
+.glass { background: var(--nav-bg); }
 
 .glass-card {
-  background: var(--color-card);
-  border: 1px solid var(--color-card-border);
-  box-shadow: var(--shadow-sm);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-xs);
   transition: box-shadow var(--duration-normal) var(--ease-out),
               border-color var(--duration-normal) var(--ease-out);
 }
 
 .glass-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--primary);
 }
 
-.gradient-text {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.ticket {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-lg);
+  position: relative;
 }
 
-/* ── Responsive containment ── */
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border: 2px solid var(--secondary);
+  color: var(--secondary);
+  font-weight: 700;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: var(--radius-sm);
+  transform: rotate(-6deg);
+  transform-origin: center;
+  animation: stamp-in 420ms var(--ease-out) both;
+}
+
+@keyframes stamp-in {
+  from { opacity: 0; transform: rotate(-6deg) scale(1.6); }
+  to { opacity: 1; transform: rotate(-6deg) scale(1); }
+}
+
+.attention-number {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.ficha {
+  border-top: 2px solid var(--fg);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.gradient-text { color: var(--primary); }
+
 @supports (contain: layout) {
-  .container-safe {
-    width: 100%;
-    overflow-x: clip;
-  }
+  .container-safe { width: 100%; overflow-x: clip; }
 }
 
-/* ── Hamburger animation ── */
 .hamburger-line {
   transition: transform var(--duration-normal) var(--ease-out),
               opacity var(--duration-fast);
@@ -227,9 +237,7 @@ p {
 .hamburger-open .hamburger-line:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
-.hamburger-open .hamburger-line:nth-child(2) {
-  opacity: 0;
-}
+.hamburger-open .hamburger-line:nth-child(2) { opacity: 0; }
 .hamburger-open .hamburger-line:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }

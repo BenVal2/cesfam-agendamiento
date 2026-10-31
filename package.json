@@ -10,9 +10,11 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
+    "db:backfill": "tsx prisma/backfill-slot-key.ts",
     "db:make-admin": "tsx prisma/make-admin.ts",
     "db:studio": "prisma studio",
     "check:layout": "node scripts/verificar-layout.mjs",
+    "check:reglas": "tsx scripts/check-reglas.ts",
     "postinstall": "prisma generate"
   },
   "prisma": {
