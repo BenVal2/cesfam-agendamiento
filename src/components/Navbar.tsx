@@ -43,7 +43,7 @@ export default function Navbar() {
               <>
                 <li><NavLink href="/login">Iniciar sesión</NavLink></li>
                 <li className="ml-1">
-                  <Link href="/registro" className="inline-flex items-center justify-center rounded-[var(--radius-md)] bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px]">
+                  <Link href="/registro" className="inline-flex items-center justify-center rounded-[var(--radius-md)] bg-primary px-4 py-2 text-sm font-semibold text-on-primary hover:bg-primary-hover transition-colors min-h-[44px]">
                     Registrarse
                   </Link>
                 </li>
@@ -87,7 +87,7 @@ export default function Navbar() {
                 <>
                   <li><MobileLink href="/login" onClick={() => setOpen(false)}>Iniciar sesión</MobileLink></li>
                   <li className="px-2 pt-2">
-                    <Link href="/registro" onClick={() => setOpen(false)} className="flex items-center justify-center rounded-[var(--radius-md)] bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary-hover transition-colors min-h-[44px]">
+                    <Link href="/registro" onClick={() => setOpen(false)} className="flex items-center justify-center rounded-[var(--radius-md)] bg-primary px-4 py-3 text-sm font-semibold text-on-primary hover:bg-primary-hover transition-colors min-h-[44px]">
                       Registrarse
                     </Link>
                   </li>

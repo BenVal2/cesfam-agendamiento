@@ -20,9 +20,9 @@ export function StepIndicator({ current, total }: StepIndicatorProps) {
               <span
                 className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold transition-all ${
                   isCurrent
-                    ? "bg-primary text-white shadow-md ring-4 ring-primary/20"
+                    ? "bg-primary text-on-primary shadow-md ring-4 ring-primary/20"
                     : isCompleted
-                      ? "bg-secondary text-white"
+                      ? "bg-secondary text-on-secondary"
                       : "bg-card-border text-fg-muted"
                 }`}
                 aria-current={isCurrent ? "step" : undefined}

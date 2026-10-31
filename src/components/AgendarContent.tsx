@@ -146,7 +146,7 @@ export default function AgendarContent() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             href="/mis-citas"
-            className="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-hover hover:shadow-md transition-all min-h-[48px]"
+            className="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-primary px-6 py-3 text-sm font-semibold text-on-primary hover:bg-primary-hover hover:shadow-md transition-all min-h-[48px]"
           >
             Ver mis citas
           </Link>
@@ -215,7 +215,7 @@ export default function AgendarContent() {
                     className="glass-card group text-left rounded-[var(--radius-xl)] p-5 hover:border-primary hover:-translate-y-0.5 hover:shadow-md transition-all cursor-pointer"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary text-base font-bold text-white shadow-sm">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary text-base font-bold text-on-primary shadow-sm">
                         {(() => {
                           const parts = doctor.name
                             .split(" ")
@@ -338,7 +338,7 @@ export default function AgendarContent() {
                     onClick={() => setSelectedTime(time)}
                     className={`rounded-[var(--radius-md)] border px-4 py-3 text-sm font-semibold transition-all min-h-[44px] ${
                       isSelected
-                        ? "border-primary bg-primary text-white shadow-md ring-2 ring-primary/30"
+                        ? "border-primary bg-primary text-on-primary shadow-md ring-2 ring-primary/30"
                         : "border-card-border bg-card text-fg hover:border-primary hover:bg-primary-soft"
                     }`}
                   >
@@ -372,7 +372,7 @@ export default function AgendarContent() {
                 type="button"
                 onClick={handleConfirm}
                 disabled={loading}
-                className="w-full rounded-[var(--radius-md)] bg-primary px-6 py-3.5 text-sm font-bold text-white hover:bg-primary-hover hover:shadow-md disabled:opacity-50 transition-all min-h-[48px] cursor-pointer"
+                className="w-full rounded-[var(--radius-md)] bg-primary px-6 py-3.5 text-sm font-bold text-on-primary hover:bg-primary-hover hover:shadow-md disabled:opacity-50 transition-all min-h-[48px] cursor-pointer"
               >
                 {loading ? "Agendando tu hora..." : "Confirmar agendamiento"}
               </button>

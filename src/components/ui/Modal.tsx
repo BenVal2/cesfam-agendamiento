@@ -90,10 +90,10 @@ export function Modal({
               type="button"
               onClick={onConfirm}
               disabled={loading}
-              className={`rounded-[var(--radius-md)] px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-50 transition-colors min-h-[44px] ${
+              className={`rounded-[var(--radius-md)] px-5 py-2.5 text-sm font-semibold disabled:opacity-50 transition-colors min-h-[44px] ${
                 confirmVariant === "danger"
-                  ? "bg-danger hover:bg-danger-hover"
-                  : "bg-primary hover:bg-primary-hover"
+                  ? "bg-danger text-on-danger hover:bg-danger-hover"
+                  : "bg-primary text-on-primary hover:bg-primary-hover"
               }`}
             >
               {loading ? "Procesando..." : confirmLabel}

@@ -104,7 +104,7 @@ export function AdminDoctoresTab({
             resetForm();
             setShowForm(true);
           }}
-          className="rounded-[var(--radius-md)] bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover shadow-sm transition-colors min-h-[44px] cursor-pointer"
+          className="rounded-[var(--radius-md)] bg-primary px-4 py-2.5 text-sm font-semibold text-on-primary hover:bg-primary-hover shadow-sm transition-colors min-h-[44px] cursor-pointer"
         >
           + Agregar médico
         </button>
@@ -148,7 +148,7 @@ export function AdminDoctoresTab({
               type="button"
               onClick={handleSave}
               disabled={saving || !name.trim()}
-              className="rounded-[var(--radius-md)] bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50 transition-colors min-h-[44px]"
+              className="rounded-[var(--radius-md)] bg-primary px-5 py-2.5 text-sm font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-50 transition-colors min-h-[44px]"
             >
               {saving ? "Guardando..." : editingId ? "Actualizar cambios" : "Guardar médico"}
             </button>
@@ -202,8 +202,8 @@ export function AdminDoctoresTab({
                 onClick={() => handleToggle(doctor.id, !doctor.active)}
                 className={`rounded-[var(--radius-md)] border px-3.5 py-2 text-xs font-semibold transition-colors min-h-[44px] ${
                   doctor.active
-                    ? "border-danger/30 text-danger hover:bg-danger hover:text-white"
-                    : "border-secondary/40 text-secondary hover:bg-secondary hover:text-white"
+                    ? "border-danger/30 text-danger hover:bg-danger hover:text-on-danger"
+                    : "border-secondary/40 text-secondary hover:bg-secondary hover:text-on-secondary"
                 }`}
               >
                 {doctor.active ? "Desactivar" : "Reactivar"}

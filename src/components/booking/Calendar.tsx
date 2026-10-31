@@ -129,7 +129,7 @@ export function Calendar({
               aria-label={`${day} de ${MONTH_NAMES[viewMonth]}${reason ? ". " + reason : ", disponible"}`}
               className={`h-11 w-full rounded-[var(--radius-md)] text-sm font-medium transition-all ${
                 isSelected
-                  ? "bg-primary text-white shadow-sm font-bold ring-2 ring-primary/30"
+                  ? "bg-primary text-on-primary shadow-sm font-bold ring-2 ring-primary/30"
                   : isAvailable
                     ? "hover:bg-primary-soft hover:text-primary text-fg font-semibold cursor-pointer"
                     : "text-fg-muted/40 cursor-not-allowed"

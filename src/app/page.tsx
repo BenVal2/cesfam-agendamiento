@@ -21,7 +21,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-2">
             <Link
               href="/agendar"
-              className="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-primary px-7 py-3.5 text-base font-semibold text-white hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors min-h-[48px]"
+              className="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-primary px-7 py-3.5 text-base font-semibold text-on-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors min-h-[48px]"
             >
               Agendar ahora
             </Link>
@@ -97,7 +97,7 @@ export default function HomePage() {
         <p className="text-fg-secondary mb-6">Crea tu cuenta y reserva tu hora en menos de un minuto.</p>
         <Link
           href="/agendar"
-          className="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-primary px-7 py-3.5 text-base font-semibold text-white hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors min-h-[48px]"
+          className="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-primary px-7 py-3.5 text-base font-semibold text-on-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors min-h-[48px]"
         >
           Agendar ahora
         </Link>

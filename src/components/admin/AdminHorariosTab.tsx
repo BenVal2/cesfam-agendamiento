@@ -100,7 +100,7 @@ export function AdminHorariosTab({
         <button
           type="button"
           onClick={() => setShowForm(true)}
-          className="rounded-[var(--radius-md)] bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover shadow-sm transition-colors min-h-[44px] cursor-pointer"
+          className="rounded-[var(--radius-md)] bg-primary px-4 py-2.5 text-sm font-semibold text-on-primary hover:bg-primary-hover shadow-sm transition-colors min-h-[44px] cursor-pointer"
         >
           + Nueva franja horaria
         </button>
@@ -197,7 +197,7 @@ export function AdminHorariosTab({
               type="button"
               onClick={handleSave}
               disabled={saving || !doctorId}
-              className="rounded-[var(--radius-md)] bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover disabled:opacity-50 transition-colors min-h-[44px]"
+              className="rounded-[var(--radius-md)] bg-primary px-5 py-2.5 text-sm font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-50 transition-colors min-h-[44px]"
             >
               {saving ? "Creando..." : "Guardar franja"}
             </button>
