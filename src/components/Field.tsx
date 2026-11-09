@@ -7,8 +7,10 @@ interface FieldProps {
   autoComplete?: string;
   value: string;
   onChange: (v: string) => void;
+  onBlur?: () => void;
   placeholder: string;
   error?: string;
+  invalid?: boolean;
 }
 
 export default function Field({
@@ -20,10 +22,13 @@ export default function Field({
   autoComplete,
   value,
   onChange,
+  onBlur,
   placeholder,
   error,
+  invalid,
 }: FieldProps) {
   const errorId = `${id}-error`;
+  const hasError = Boolean(error || invalid);
   return (
     <div>
       <label htmlFor={id} className="block text-sm font-medium text-fg mb-1.5">
@@ -37,10 +42,11 @@ export default function Field({
         autoComplete={autoComplete}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        aria-invalid={error ? true : undefined}
+        onBlur={onBlur}
+        aria-invalid={hasError ? true : undefined}
         aria-describedby={error ? errorId : undefined}
         className={`w-full rounded-[var(--radius-md)] border bg-input-bg px-4 py-3 text-sm text-fg placeholder:text-fg-muted focus:outline-none focus:ring-2 transition-shadow min-h-[44px] ${
-          error
+          hasError
             ? "border-danger focus:border-danger focus:ring-danger/20"
             : "border-input-border focus:border-input-focus focus:ring-input-ring"
         }`}

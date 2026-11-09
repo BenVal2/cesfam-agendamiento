@@ -14,9 +14,55 @@ export default function RegistroPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  function validateField(field: "name" | "email" | "phone" | "password", value: string) {
+    let message = "";
+    if (field === "name" && !value.trim()) message = "Ingresa tu nombre completo.";
+    if (field === "email") {
+      if (!value.trim()) message = "Ingresa tu email.";
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) message = "Ingresa un email válido.";
+    }
+    if (field === "phone" && value.trim() && !/^\+?[\d\s-]{7,}$/.test(value.trim())) {
+      message = "Ingresa un teléfono válido o déjalo vacío.";
+    }
+    if (field === "password") {
+      if (!value) message = "Crea una contraseña.";
+      else if (value.length < 6) message = "La contraseña debe tener al menos 6 caracteres.";
+    }
+
+    setFieldErrors((prev) => ({ ...prev, [field]: message }));
+    return message;
+  }
+
+  function validateAll() {
+    const errors: Record<string, string> = {};
+    errors.name = validateField("name", name);
+    errors.email = validateField("email", email);
+    errors.phone = validateField("phone", phone);
+    errors.password = validateField("password", password);
+    setTouched({ name: true, email: true, phone: true, password: true });
+    const labels: Record<string, string> = {
+      name: "nombre completo",
+      email: "email",
+      phone: "teléfono",
+      password: "contraseña",
+    };
+    const missing = Object.entries(errors)
+      .filter(([, message]) => message)
+      .map(([field]) => labels[field]);
+    if (missing.length > 0) {
+      setError(`Completa estos campos: ${missing.join(", ")}.`);
+      return false;
+    }
+    setError(null);
+    return true;
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!validateAll()) return;
     setLoading(true);
     setError(null);
 
@@ -52,10 +98,8 @@ export default function RegistroPage() {
   }
 
   return (
-    <div className="relative w-full flex justify-center py-8 sm:py-12">
-      <div aria-hidden="true" className="pointer-events-none absolute -left-24 top-8 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
-      <div aria-hidden="true" className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-secondary/20 blur-3xl" />
-      <div className="relative w-full max-w-md">
+    <div className="w-full flex justify-center py-8 sm:py-12">
+      <div className="w-full max-w-md">
       <div className="text-center mb-8">
         <span className="inline-flex h-14 w-14 items-center justify-center rounded-[var(--radius-xl)] bg-secondary-soft text-secondary mb-4" aria-hidden="true">
           <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -79,11 +123,79 @@ export default function RegistroPage() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="flex w-full flex-col auth-glass rounded-[var(--radius-2xl)] p-6 sm:p-8 gap-5">
-        <Field id="name" label="Nombre completo *" type="text" required autoComplete="name" value={name} onChange={setName} placeholder="Tu nombre" />
-        <Field id="email" label="Email *" type="email" required autoComplete="email" value={email} onChange={setEmail} placeholder="tu@email.com" />
-        <Field id="phone" label="Teléfono (opcional)" type="tel" autoComplete="tel" value={phone} onChange={setPhone} placeholder="+56 9 1234 5678" />
-        <Field id="password" label="Contraseña *" type="password" required minLength={6} autoComplete="new-password" value={password} onChange={setPassword} placeholder="Mínimo 6 caracteres" />
+      <form onSubmit={handleSubmit} noValidate className="flex w-full flex-col glass-card rounded-[var(--radius-2xl)] p-6 sm:p-8 gap-5">
+        <Field
+          id="name"
+          label="Nombre completo *"
+          type="text"
+          required
+          autoComplete="name"
+          value={name}
+          onChange={(v) => {
+            setName(v);
+            if (touched.name) validateField("name", v);
+          }}
+          onBlur={() => {
+            setTouched((prev) => ({ ...prev, name: true }));
+            validateField("name", name);
+          }}
+          invalid={Boolean(touched.name && fieldErrors.name)}
+          placeholder="Tu nombre"
+        />
+        <Field
+          id="email"
+          label="Email *"
+          type="email"
+          required
+          autoComplete="email"
+          value={email}
+          onChange={(v) => {
+            setEmail(v);
+            if (touched.email) validateField("email", v);
+          }}
+          onBlur={() => {
+            setTouched((prev) => ({ ...prev, email: true }));
+            validateField("email", email);
+          }}
+          invalid={Boolean(touched.email && fieldErrors.email)}
+          placeholder="tu@email.com"
+        />
+        <Field
+          id="phone"
+          label="Teléfono (opcional)"
+          type="tel"
+          autoComplete="tel"
+          value={phone}
+          onChange={(v) => {
+            setPhone(v);
+            if (touched.phone) validateField("phone", v);
+          }}
+          onBlur={() => {
+            setTouched((prev) => ({ ...prev, phone: true }));
+            validateField("phone", phone);
+          }}
+          invalid={Boolean(touched.phone && fieldErrors.phone)}
+          placeholder="+56 9 1234 5678"
+        />
+        <Field
+          id="password"
+          label="Contraseña *"
+          type="password"
+          required
+          minLength={6}
+          autoComplete="new-password"
+          value={password}
+          onChange={(v) => {
+            setPassword(v);
+            if (touched.password) validateField("password", v);
+          }}
+          onBlur={() => {
+            setTouched((prev) => ({ ...prev, password: true }));
+            validateField("password", password);
+          }}
+          invalid={Boolean(touched.password && fieldErrors.password)}
+          placeholder="Mínimo 6 caracteres"
+        />
         <button
           type="submit"
           disabled={loading}

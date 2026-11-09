@@ -19,7 +19,7 @@ export default function HomePage() {
             en línea. Eliges médico, fecha y hora, y recibes un comprobante al
             instante.
           </p>
-          <div className="grid max-w-xl grid-cols-2 overflow-hidden rounded-[var(--radius-lg)] border border-card-border bg-card text-sm sm:grid-cols-3" aria-label="Horario de atención">
+          <div className="grid max-w-xl grid-cols-2 overflow-hidden rounded-[var(--radius-lg)] border border-card-border bg-card text-sm shadow-sm sm:grid-cols-3" aria-label="Horario de atención">
             <div className="border-r border-card-border px-4 py-3">
               <p className="font-bold text-fg">Lun a Vie</p>
               <p className="text-fg-muted">09:00–12:00</p>
