@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Botón claro/oscuro.
@@ -11,6 +11,11 @@ import { useEffect } from "react";
  * el sistema.
  */
 export default function ThemeToggle({ className = "" }: { className?: string }) {
+  const [isDark, setIsDark] = useState<boolean>(() =>
+    typeof document !== "undefined" &&
+    document.documentElement.classList.contains("dark")
+  );
+
   useEffect(() => {
     // Si el sistema cambia y el usuario no ha elegido, seguir al sistema.
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
@@ -24,16 +29,17 @@ export default function ThemeToggle({ className = "" }: { className?: string }) 
       if (stored) return;
       document.documentElement.classList.toggle("dark", e.matches);
       document.documentElement.style.colorScheme = e.matches ? "dark" : "light";
+      setIsDark(e.matches);
     };
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
   function toggle() {
-    const isDark = document.documentElement.classList.contains("dark");
-    const next = !isDark;
+    const next = !document.documentElement.classList.contains("dark");
     document.documentElement.classList.toggle("dark", next);
     document.documentElement.style.colorScheme = next ? "dark" : "light";
+    setIsDark(next);
     try {
       localStorage.setItem("theme", next ? "dark" : "light");
     } catch {
@@ -45,7 +51,8 @@ export default function ThemeToggle({ className = "" }: { className?: string }) 
     <button
       type="button"
       onClick={toggle}
-      aria-label="Cambiar entre tema claro y oscuro"
+      aria-pressed={isDark}
+      aria-label={isDark ? "Cambiar a tema claro" : "Cambiar a tema oscuro"}
       title="Cambiar tema"
       className={`inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] text-fg-secondary hover:text-fg hover:bg-card-hover transition-colors cursor-pointer ${className}`}
     >

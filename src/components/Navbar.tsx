@@ -17,7 +17,7 @@ export default function Navbar() {
       <nav className="mx-auto max-w-5xl px-5 sm:px-8 lg:px-10" aria-label="Navegación principal">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-3 text-fg no-underline shrink-0">
-            <span className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] border-2 border-primary text-primary font-bold text-sm" aria-hidden="true">
+            <span className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] bg-primary text-on-primary font-bold text-sm" aria-hidden="true">
               CV
             </span>
             <span className="font-bold text-base tracking-tight hidden sm:inline">CESFAM Cristo Vive</span>

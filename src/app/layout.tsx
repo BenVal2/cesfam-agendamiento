@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Atkinson_Hyperlegible } from "next/font/google";
+import { Atkinson_Hyperlegible, Fraunces } from "next/font/google";
 import SessionProvider from "@/components/SessionProvider";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
@@ -8,6 +8,12 @@ const atkinson = Atkinson_Hyperlegible({
   variable: "--font-atkinson",
   subsets: ["latin"],
   weight: ["400", "700"],
+});
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -26,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${atkinson.variable} h-full antialiased`} suppressHydrationWarning>
+    <html lang="es" className={`${atkinson.variable} ${fraunces.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-screen flex flex-col">
         <script
           dangerouslySetInnerHTML={{

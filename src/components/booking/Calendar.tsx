@@ -103,6 +103,7 @@ export function Calendar({
 
           const isSelected =
             selectedDate && selectedDate.toISOString().slice(0, 10) === dateStr;
+          const isToday = dateStr === today;
 
           const reason = holiday
             ? `Feriado: ${holiday}`
@@ -127,11 +128,13 @@ export function Calendar({
               }}
               title={reason}
               aria-label={`${day} de ${MONTH_NAMES[viewMonth]}${reason ? ". " + reason : ", disponible"}`}
+              aria-pressed={Boolean(isSelected)}
+              aria-current={isToday ? "date" : undefined}
               className={`h-11 w-full rounded-[var(--radius-md)] text-sm font-medium transition-all ${
                 isSelected
                   ? "bg-primary text-on-primary shadow-sm font-bold ring-2 ring-primary/30"
                   : isAvailable
-                    ? "hover:bg-primary-soft hover:text-primary text-fg font-semibold cursor-pointer"
+                    ? `hover:bg-primary-soft hover:text-primary text-fg font-semibold cursor-pointer ${isToday ? "ring-1 ring-primary" : ""}`
                     : "text-fg-muted/40 cursor-not-allowed"
               }`}
             >

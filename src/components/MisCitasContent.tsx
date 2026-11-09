@@ -145,28 +145,37 @@ export default function MisCitasContent() {
               (aptDate === clinic.date &&
                 minutesOf(apt.appointmentTime) - clinic.minutes >=
                   BOOKING_CUTOFF_MINUTES);
+            const dateObj = new Date(`${aptDate}T00:00:00.000Z`);
+            const monthShort = new Intl.DateTimeFormat("es-CL", {
+              month: "short",
+              timeZone: "UTC",
+            })
+              .format(dateObj)
+              .replace(".", "");
 
             return (
               <li
                 key={apt.id}
-                className={`glass-card rounded-[var(--radius-xl)] p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all ${
-                  isCancelled ? "opacity-60 bg-card/40" : "hover:border-primary/50 hover:shadow-sm"
+                className={`rounded-[var(--radius-xl)] border border-card-border bg-card p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all ${
+                  isCancelled ? "opacity-60" : "hover:border-primary/50 hover:shadow-sm"
                 }`}
               >
                 <div className="flex items-start gap-4">
                   <div
-                    className={`w-12 h-12 rounded-[var(--radius-lg)] flex items-center justify-center shrink-0 ${
-                      isCancelled ? "bg-card-border text-fg-muted" : "bg-primary-soft text-primary"
+                    aria-hidden="true"
+                    className={`flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-[var(--radius-md)] border ${
+                      isCancelled
+                        ? "border-card-border bg-card text-fg-muted"
+                        : "border-primary/30 bg-primary-soft text-primary"
                     }`}
                   >
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-                    </svg>
+                    <span className="attention-number text-xl leading-none">{dateObj.getUTCDate()}</span>
+                    <span className="mt-1 text-[0.65rem] font-bold uppercase tracking-wider">{monthShort}</span>
                   </div>
 
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className="font-bold text-fg text-base">{apt.doctor.name}</h3>
+                      <h2 className="font-bold text-fg text-base">{apt.doctor.name}</h2>
                       <Badge variant={badgeVariant}>
                         {APPOINTMENT_STATUS_LABELS[apt.status] || apt.status}
                       </Badge>

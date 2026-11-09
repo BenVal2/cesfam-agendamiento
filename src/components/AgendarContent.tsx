@@ -122,12 +122,6 @@ export default function AgendarContent() {
   if (success) {
     return (
       <div id="booking-success" className="flex max-w-md mx-auto flex-col gap-6 py-10 text-center animate-in fade-in duration-300">
-        <div className="w-16 h-16 rounded-full bg-success-bg flex items-center justify-center mx-auto ring-4 ring-success-bg/40">
-          <svg className="w-8 h-8 text-secondary" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-          </svg>
-        </div>
-
         <div className="flex flex-col gap-1">
           <h1 className="text-2xl font-bold text-fg">¡Cita agendada con éxito!</h1>
           <p className="text-sm text-fg-secondary">
@@ -135,13 +129,29 @@ export default function AgendarContent() {
           </p>
         </div>
 
-        <dl className="flex flex-col glass-card rounded-[var(--radius-xl)] p-6 gap-3 text-left">
-          <SummaryRow label="Médico" value={selectedDoctor?.name || ""} />
-          <SummaryRow label="Especialidad" value={selectedDoctor?.specialty || ""} />
-          <SummaryRow label="Fecha" value={selectedDate ? formatChileanDate(selectedDate) : ""} />
-          <SummaryRow label="Hora" value={selectedTime ? formatTime(selectedTime) : ""} />
-          <SummaryRow label="Paciente" value={`${session.user?.name} (${session.user?.email})`} />
-        </dl>
+        <article className="ticket rounded-[var(--radius-xl)] p-6 text-left" aria-labelledby="success-ticket-title">
+          <div className="mb-5 flex items-start justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold text-fg-muted">Ficha de confirmación</p>
+              <h2 id="success-ticket-title" className="mt-1 text-base font-bold text-fg">Comprobante de hora</h2>
+            </div>
+            <span className="stamp">Confirmada</span>
+          </div>
+
+          <div className="border-y border-dashed border-card-border py-4">
+            <p className="text-xs font-semibold text-fg-muted">Fecha y hora</p>
+            <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-5 gap-y-2">
+              <p className="attention-number text-2xl leading-none text-fg">{selectedDate ? formatChileanDate(selectedDate) : ""}</p>
+              <p className="attention-number text-2xl leading-none text-primary">{selectedTime ? formatTime(selectedTime) : ""}</p>
+            </div>
+          </div>
+
+          <dl className="flex flex-col gap-3 pt-4 text-sm">
+            <SummaryRow label="Médico" value={selectedDoctor?.name || ""} />
+            <SummaryRow label="Especialidad" value={selectedDoctor?.specialty || ""} />
+            <SummaryRow label="Paciente" value={`${session.user?.name} (${session.user?.email})`} />
+          </dl>
+        </article>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
@@ -215,7 +225,7 @@ export default function AgendarContent() {
                     className="glass-card group text-left rounded-[var(--radius-xl)] p-5 hover:border-primary hover:-translate-y-0.5 hover:shadow-md transition-all cursor-pointer"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary text-base font-bold text-on-primary shadow-sm">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-base font-bold text-on-primary shadow-sm">
                         {(() => {
                           const parts = doctor.name
                             .split(" ")
@@ -304,9 +314,9 @@ export default function AgendarContent() {
             </button>
           </div>
 
-          <div className="glass-card rounded-[var(--radius-lg)] p-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2 border border-card-border">
+          <div className="rounded-[var(--radius-lg)] border border-card-border bg-card p-4 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <span className="text-xs text-fg-muted uppercase font-semibold tracking-wider">Atención médica</span>
+              <span className="text-sm text-fg-muted font-semibold">Atención médica</span>
               <p className="font-semibold text-fg">{selectedDoctor?.name} &bull; {selectedDoctor?.specialty}</p>
             </div>
             <div className="text-sm font-medium text-primary">
@@ -336,6 +346,7 @@ export default function AgendarContent() {
                     key={time}
                     type="button"
                     onClick={() => setSelectedTime(time)}
+                    aria-pressed={isSelected}
                     className={`rounded-[var(--radius-md)] border px-4 py-3 text-sm font-semibold transition-all min-h-[44px] ${
                       isSelected
                         ? "border-primary bg-primary text-on-primary shadow-md ring-2 ring-primary/30"
@@ -350,7 +361,7 @@ export default function AgendarContent() {
           )}
 
           {selectedTime && (
-            <div className="glass-card rounded-[var(--radius-xl)] p-6 flex flex-col gap-5 border border-primary/30 shadow-md">
+            <article className="ticket rounded-[var(--radius-xl)] p-6 flex flex-col gap-5">
               <div className="flex items-center gap-2 pb-3 border-b border-card-border">
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-soft text-secondary">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
@@ -376,7 +387,7 @@ export default function AgendarContent() {
               >
                 {loading ? "Agendando tu hora..." : "Confirmar agendamiento"}
               </button>
-            </div>
+            </article>
           )}
         </section>
       )}

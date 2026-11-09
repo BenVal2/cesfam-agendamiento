@@ -14,7 +14,7 @@
   --color-bg-elevated: #fbf8f1;
   --color-fg: #1c1917;
   --color-fg-secondary: #44403c;
-  --color-fg-muted: #78716c;
+  --color-fg-muted: #6e6860;
 
   /* Brand: azul de timbre */
   --color-primary: #1e3a8a;
@@ -33,10 +33,10 @@
 
   /* Surfaces: papel, sin blur */
   --color-card: #ffffff;
-  --color-card-border: #d6d0c4;
+  --color-card-border: #c9c1b3;
   --color-card-hover: #f0ece2;
   --color-nav-bg: #f5f1e8;
-  --color-nav-border: #d6d0c4;
+  --color-nav-border: #c9c1b3;
 
   /* Inputs */
   --color-input-bg: #fbf8f1;
@@ -66,6 +66,7 @@
 
   /* Font */
   --font-sans: var(--font-atkinson), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-fraunces), "Fraunces", Georgia, serif;
 }
 
 /* ── Dark Mode ── */
@@ -184,6 +185,22 @@ body {
   position: relative;
 }
 
+.ticket::before,
+.ticket::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  background: var(--color-bg);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.ticket::before { left: -0.625rem; }
+.ticket::after { right: -0.625rem; }
+
 /* Sello "Confirmada": único gesto animado */
 .stamp {
   display: inline-flex;
@@ -221,6 +238,20 @@ body {
 }
 
 .gradient-text { color: var(--color-primary); }
+
+/* Entrada del hero: el contenido es visible por defecto; la animación solo
+   aporta una aparición breve (y respeta reduced-motion más abajo). */
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-enter,
+.ticket-enter {
+  animation: hero-in 650ms var(--ease-out, ease-out) both;
+}
+
+.ticket-enter { animation-delay: 140ms; }
 
 /* ── Responsive containment ── */
 @supports (contain: layout) {
