@@ -222,7 +222,7 @@ export default function AgendarContent() {
                       setSelectedDoctor(doctor);
                       setStep(2);
                     }}
-                    className="glass-card group text-left rounded-[var(--radius-xl)] p-5 hover:border-primary hover:-translate-y-0.5 hover:shadow-md transition-all cursor-pointer"
+                    className="glass-panel group text-left rounded-[var(--radius-xl)] p-5 hover:border-primary hover:-translate-y-0.5 hover:shadow-md transition-all cursor-pointer"
                   >
                     <div className="flex items-start gap-4">
                       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-base font-bold text-on-primary shadow-sm">
@@ -327,7 +327,7 @@ export default function AgendarContent() {
           {loadingTimes ? (
             <p className="text-center text-fg-muted py-8" role="status">Buscando horas disponibles...</p>
           ) : availableTimes.length === 0 ? (
-            <div className="glass-card rounded-[var(--radius-xl)] p-8 text-center text-fg-muted">
+            <div className="glass-panel rounded-[var(--radius-xl)] p-8 text-center text-fg-muted">
               <p className="font-medium">{availabilityNote || "No hay horas disponibles para esta fecha."}</p>
               <button
                 type="button"

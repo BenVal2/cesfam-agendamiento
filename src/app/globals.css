@@ -177,6 +177,27 @@ body {
   border-color: var(--color-primary);
 }
 
+/* Marcos con efecto cristal (agendar / mis citas) */
+.glass-panel {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-card) 72%, transparent),
+    color-mix(in srgb, var(--color-card-hover) 54%, transparent)
+  );
+  border: 1px solid color-mix(in srgb, var(--color-card-border) 72%, color-mix(in srgb, var(--color-card) 58%, transparent));
+  box-shadow:
+    var(--shadow-md),
+    inset 0 1px 0 color-mix(in srgb, var(--color-card) 45%, transparent);
+  backdrop-filter: blur(18px) saturate(155%);
+  -webkit-backdrop-filter: blur(18px) saturate(155%);
+  transition: box-shadow 250ms var(--ease-out, ease-out), border-color 250ms var(--ease-out, ease-out);
+}
+
+.glass-panel:hover {
+  box-shadow: var(--shadow-lg), inset 0 1px 0 color-mix(in srgb, var(--color-card) 45%, transparent);
+  border-color: var(--color-primary);
+}
+
 /* Escena de autenticación: se integra con el entorno (claro/oscuro) */
 .auth-scene {
   color: var(--color-fg);

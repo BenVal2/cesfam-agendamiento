@@ -47,7 +47,7 @@ export function Calendar({
   }
 
   return (
-    <div className="glass-card rounded-[var(--radius-xl)] p-4 sm:p-6 shadow-sm">
+    <div className="glass-panel rounded-[var(--radius-xl)] p-4 sm:p-6 shadow-sm">
       <div className="flex items-center justify-between mb-4">
         <button
           type="button"
