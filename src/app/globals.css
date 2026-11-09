@@ -177,6 +177,15 @@ body {
   border-color: var(--color-primary);
 }
 
+/* Panel de autenticación con efecto cristal */
+.auth-glass {
+  background: color-mix(in srgb, var(--color-card) 68%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-card-border) 72%, transparent);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+
 /* Comprobante de hora: único elemento elevado */
 .ticket {
   background: var(--color-card);

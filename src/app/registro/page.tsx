@@ -52,8 +52,10 @@ export default function RegistroPage() {
   }
 
   return (
-    <div className="w-full flex justify-center py-8 sm:py-12">
-      <div className="w-full max-w-md">
+    <div className="relative w-full flex justify-center py-8 sm:py-12">
+      <div aria-hidden="true" className="pointer-events-none absolute -left-24 top-8 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-secondary/20 blur-3xl" />
+      <div className="relative w-full max-w-md">
       <div className="text-center mb-8">
         <span className="inline-flex h-14 w-14 items-center justify-center rounded-[var(--radius-xl)] bg-secondary-soft text-secondary mb-4" aria-hidden="true">
           <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -77,7 +79,7 @@ export default function RegistroPage() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="flex w-full flex-col glass-card rounded-[var(--radius-2xl)] p-6 sm:p-8 gap-5">
+      <form onSubmit={handleSubmit} className="flex w-full flex-col auth-glass rounded-[var(--radius-2xl)] p-6 sm:p-8 gap-5">
         <Field id="name" label="Nombre completo *" type="text" required autoComplete="name" value={name} onChange={setName} placeholder="Tu nombre" />
         <Field id="email" label="Email *" type="email" required autoComplete="email" value={email} onChange={setEmail} placeholder="tu@email.com" />
         <Field id="phone" label="Teléfono (opcional)" type="tel" autoComplete="tel" value={phone} onChange={setPhone} placeholder="+56 9 1234 5678" />
