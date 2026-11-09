@@ -98,8 +98,11 @@ export default function RegistroPage() {
   }
 
   return (
-    <div className="w-full flex justify-center py-8 sm:py-12">
-      <div className="w-full max-w-md">
+    <div className="auth-scene relative isolate flex w-full justify-center overflow-hidden rounded-[var(--radius-2xl)] border border-card-border px-4 py-10 sm:px-8 sm:py-16">
+      <div aria-hidden="true" className="auth-orb pointer-events-none absolute -left-32 top-0 h-96 w-96 rounded-full bg-primary/35 blur-3xl" />
+      <div aria-hidden="true" className="auth-orb pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-secondary/30 blur-3xl [animation-delay:-4s]" />
+      <div aria-hidden="true" className="auth-orb pointer-events-none absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl [animation-delay:-7s]" />
+      <div className="relative w-full max-w-md">
       <div className="text-center mb-8">
         <span className="inline-flex h-14 w-14 items-center justify-center rounded-[var(--radius-xl)] bg-secondary-soft text-secondary mb-4" aria-hidden="true">
           <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -123,7 +126,7 @@ export default function RegistroPage() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} noValidate className="flex w-full flex-col glass-card rounded-[var(--radius-2xl)] p-6 sm:p-8 gap-5">
+      <form onSubmit={handleSubmit} noValidate className="flex w-full flex-col auth-glass rounded-[var(--radius-2xl)] p-6 sm:p-8 gap-5">
         <Field
           id="name"
           label="Nombre completo *"

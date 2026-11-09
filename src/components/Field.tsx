@@ -47,7 +47,7 @@ export default function Field({
         aria-describedby={error ? errorId : undefined}
         className={`w-full rounded-[var(--radius-md)] border bg-input-bg px-4 py-3 text-sm text-fg placeholder:text-fg-muted focus:outline-none focus:ring-2 transition-shadow min-h-[44px] ${
           hasError
-            ? "border-danger focus:border-danger focus:ring-danger/20"
+            ? "border-2 border-danger bg-danger-soft/40 focus:border-danger focus:ring-danger/30"
             : "border-input-border focus:border-input-focus focus:ring-input-ring"
         }`}
         placeholder={placeholder}
